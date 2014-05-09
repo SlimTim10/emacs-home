@@ -1,0 +1,18 @@
+(provide 'tea-timer)
+
+(defun my-alarm ()
+  (interactive)
+  (setq frame-name (cdr (assoc 'name (frame-parameters))))
+  (set-frame-name "ALARM!")
+  (dotimes (i 30)
+	(beep))
+  (read-from-minibuffer "ALARM!")
+  (set-frame-name frame-name))
+
+(defun tea-timer ()
+  (interactive)
+  (setq input-string (read-string "Tea timer: "))
+  (if (eq (string-match "\\([0-9]+\\)\s*min" input-string) 0)
+	  (setq sec (* (string-to-number (match-string 1 input-string)) 60))
+	(setq sec (string-to-number input-string)))
+  (run-with-timer sec nil 'my-alarm))
