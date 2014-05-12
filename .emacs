@@ -1,4 +1,4 @@
-;;; 2014-05-07
+;;; 2014-05-12
 
 ;; Melpa
 (when (>= emacs-major-version 24)
@@ -91,6 +91,8 @@
 (require 'weather)
 (require 'tea-timer)
 (require 'imdb)
+(require 'mail-me)
+(require 'kaleidoscopeflux-blog-notify)
 
 ;; Use monospaced font faces in current buffer
 (defun my-buffer-face-mode-fixed ()
