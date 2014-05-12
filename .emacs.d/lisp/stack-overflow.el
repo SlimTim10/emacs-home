@@ -17,8 +17,6 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(provide 'stack-overflow)
-
 ;; Open Google's top stack overflow result.
 
 (defun stack-overflow ()
@@ -42,3 +40,5 @@
 	(copy-region-as-kill beg (match-beginning 0))
 	(kill-buffer (current-buffer)))
   (browse-url (current-kill 1)))
+
+(provide 'stack-overflow)

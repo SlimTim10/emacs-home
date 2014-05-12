@@ -17,8 +17,6 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(provide 'weather)
-
 ;; Center a string inside spacing of given length
 
 (defun center-string (str len)
@@ -172,3 +170,5 @@
 				temp-6
 				temp-7))
   (message "%s" weather-string))
+
+(provide 'weather)

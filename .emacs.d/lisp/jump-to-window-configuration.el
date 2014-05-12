@@ -17,8 +17,6 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(provide 'jump-to-window-configuration)
-
 ;; Jump to a saved window configuration in register
 
 (defun jump-to-window-configuration (n)
@@ -37,3 +35,5 @@
 ;; (global-set-key (kbd "C-c 7") (lambda () (interactive) (jump-to-window-configuration ?7)))
 ;; (global-set-key (kbd "C-c 8") (lambda () (interactive) (jump-to-window-configuration ?8)))
 ;; (global-set-key (kbd "C-c 9") (lambda () (interactive) (jump-to-window-configuration ?9)))
+
+(provide 'jump-to-window-configuration)

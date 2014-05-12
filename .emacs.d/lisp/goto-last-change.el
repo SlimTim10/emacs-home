@@ -17,9 +17,6 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(provide 'goto-last-change)
-(provide 'goto-last-change-no-mark)
-
 ;; Move point to last change made. If the change is an insertion, mark the entire change, otherwise do not mark.
 ;; Provide numeric prefix argument to choose change, starting with 1 being the most recent.
 ;; E.g., "C-3 M-x goto-last-change" will go to the 3rd last change.
@@ -57,3 +54,6 @@
       (goto-char (abs (cdr-safe (cadr buffer-undo-list)))))) ; Go to the end of the last change
 
 ;; (global-set-key (kbd "C-x C-.") 'goto-last-change)
+
+(provide 'goto-last-change)
+(provide 'goto-last-change-no-mark)

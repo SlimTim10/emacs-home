@@ -17,8 +17,6 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(provide 'dired-run-file)
-
 ;; Run a single file as a process (don't keep track of it)
 
 (defun dired-run-file (command &optional arg file-list)
@@ -67,3 +65,5 @@
 			  (start-process-shell-command "" nil command)))))))
 
 ;; (global-set-key (kbd "C-c RET") 'dired-run-file)
+
+(provide 'dired-run-file)

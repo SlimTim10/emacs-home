@@ -17,8 +17,6 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(provide 'imdb)
-
 ;; Use Google's "I'm feeling lucky" to go to an IMDB page
 
 (defun imdb ()
@@ -31,3 +29,5 @@
 	 (if mark-active
 		 (buffer-substring (region-beginning) (region-end))
 	   (read-string "IMDB: "))))))
+
+(provide 'imdb)

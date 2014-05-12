@@ -17,8 +17,6 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-(provide 'search-files)
-
 ;; Search all files in current directory (not recursive) for a string.
 
 (defun search-files ()
@@ -65,3 +63,5 @@
   (goto-line 0)) ; Go to the start of the results
 
 ;; (global-set-key (kbd "C-c s") 'search-files)
+
+(provide 'search-files)
