@@ -92,7 +92,10 @@
 (require 'tea-timer)
 (require 'imdb)
 (require 'mail-me)
+(load "kaleidoscopeflux-blog-notify.el")
 (require 'kaleidoscopeflux-blog-notify)
+(load "headache-pressure-notify.el")
+(require 'headache-pressure-notify)
 
 ;; Use monospaced font faces in current buffer
 (defun my-buffer-face-mode-fixed ()
