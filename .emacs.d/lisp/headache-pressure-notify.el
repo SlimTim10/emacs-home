@@ -38,9 +38,19 @@
 	)
   (cond
    ((< n-pressure 101.5)
-	(mail-me "Headache Alert" (concat "Probable headache approaching!\n\nThe pressure is currently " s-pressure " and " tendency ".")))
+	(let ((subj "Headache Alert")
+		  (msg (concat "Probable headache approaching!\n\nThe pressure is currently " s-pressure " and " tendency ".")))
+	  (mail-me subj msg)
+	  (my-mail-to "brittanyedwards@rogers.com" subj msg)
+	  (my-mail-to "jean@jeanpare.net" subj msg)
+	  (my-mail-to "seasidecity@gmail.com" subj msg)))
    ((and (<= n-pressure 101.7) (string= tendency "falling"))
-	(mail-me "Headache Alert" (concat "Possible headache approaching.\n\nThe pressure is currently " s-pressure " and " tendency ".")))
+	(let ((subj "Headache Alert")
+		  (msg (concat "Possible headache approaching.\n\nThe pressure is currently " s-pressure " and " tendency ".")))
+	  (mail-me subj msg)
+	  (my-mail-to "brittanyedwards@rogers.com" subj msg)
+	  (my-mail-to "jean@jeanpare.net" subj msg)
+	  (my-mail-to "seasidecity@gmail.com" subj msg)))
    ))
 
 ;; Start checking every 4 hours

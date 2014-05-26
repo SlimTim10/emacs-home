@@ -92,6 +92,7 @@
 (require 'tea-timer)
 (require 'imdb)
 (require 'mail-me)
+(require 'my-mail-to)
 (load "kaleidoscopeflux-blog-notify.el")
 (require 'kaleidoscopeflux-blog-notify)
 (load "headache-pressure-notify.el")
