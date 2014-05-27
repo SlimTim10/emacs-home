@@ -1,4 +1,4 @@
-;;; 2014-05-26
+;;; 2014-05-27
 
 ;; Melpa
 (when (>= emacs-major-version 24)
@@ -98,13 +98,18 @@
 (load "headache-pressure-notify.el")
 (require 'headache-pressure-notify)
 
+;; Easier window movement
+(global-set-key (kbd "M-J") (lambda () (interactive) (enlarge-window 1)))
+(global-set-key (kbd "M-K") (lambda () (interactive) (enlarge-window -1)))
+(global-set-key (kbd "M-H") (lambda () (interactive) (enlarge-window -1 t)))
+(global-set-key (kbd "M-L") (lambda () (interactive) (enlarge-window 1 t)))
+
 ;; Use monospaced font faces in current buffer
 (defun my-buffer-face-mode-fixed ()
   "Sets a fixed width (monospace) font in current buffer"
   (interactive)
   (setq buffer-face-mode-face '(:family "Lucida Sans Typewriter"))
   (buffer-face-mode))
-
 
 ;; Dired
 (require 'ls-lisp)
