@@ -1,4 +1,4 @@
-;;; 2014-05-27
+;;; 2014-08-07
 
 ;; Melpa
 (when (>= emacs-major-version 24)
@@ -48,7 +48,7 @@
 (when (eq system-type 'windows-nt)
   ;; Set font
   (add-to-list 'default-frame-alist
-			   '(font . "Lucida Sans-10:bold"))
+			   '(font . "Lucida Sans-10:demibold"))
   (setq delete-by-moving-to-trash t)
   (load "dired-keys-win.el")
 )
@@ -119,6 +119,7 @@
       ls-lisp-use-localized-time-format t)
 (setq dired-dwim-target t) ; Try to guess a default target directory
 (setq dired-recursive-deletes 'always) ; Delete recursively without asking
+(setq dired-isearch-filenames t) ; Limit search commands to file names
 (put 'dired-find-alternate-file 'disabled nil) ; Enable useful command
 ;; Set default font face for dired mode
 (add-hook 'dired-mode-hook 'my-buffer-face-mode-fixed)
