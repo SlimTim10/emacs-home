@@ -2,7 +2,7 @@
 ;; Copyright (C) 2014  SlimTim10
 
 ;; Author: SlimTim10 <slimtim10@gmail.com>
-;; Created: 11 Sep 2014
+;; Created: 10 Mar 2014
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 			(string-match "empty" file-type)
 			(string-match "directory" file-type))
 		(dired-find-file)
-	  (w32-shell-execute "open" file-name))))
+	  (dired-run-file (shell-quote-argument file-name)))))
 
 (defun dired-mode-keys ()
   "My keys for dired-mode."
