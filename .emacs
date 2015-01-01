@@ -1,4 +1,4 @@
-;;; 2014-08-07
+;;; 2014-09-22
 
 ;; Melpa
 (when (>= emacs-major-version 24)
@@ -36,6 +36,7 @@
 (setq visible-bell t)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(hl-line-mode 1)
 (setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
 (display-time-mode t)
 (setq backup-directory-alist
@@ -66,13 +67,18 @@
 ;; Handle wrapping in text mode
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 
+;; Quick way to reload .emacs configuration
+(defun reload-emacs ()
+  (interactive)
+  (load-file "~/.emacs"))
+
 ;; Personal packages
 (require 'goto-last-change)
 (global-set-key (kbd "C-x C-.") 'goto-last-change)
 (require 'search-files)
 (global-set-key (kbd "C-c s") 'search-files)
-(require 'dired-run-file)
-(global-set-key (kbd "C-c RET") 'dired-run-file)
+(require 'dired-w32-open-file)
+(global-set-key (kbd "C-c RET") 'dired-w32-open-file)
 (require 'jump-to-window-configuration)
 (global-set-key (kbd "C-c 0") (lambda () (interactive) (jump-to-window-configuration ?0)))
 (global-set-key (kbd "C-c 1") (lambda () (interactive) (jump-to-window-configuration ?1)))
@@ -123,6 +129,9 @@
 (put 'dired-find-alternate-file 'disabled nil) ; Enable useful command
 ;; Set default font face for dired mode
 (add-hook 'dired-mode-hook 'my-buffer-face-mode-fixed)
+;; Allow dired to be able to delete or copy a whole dir
+(setq dired-recursive-copies (quote always)) ; "always" means no asking
+(setq dired-recursive-deletes (quote top)) ; "top" means ask once
 
 ;; Colour theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
