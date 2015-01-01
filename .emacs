@@ -157,3 +157,6 @@
 (setq smtpmail-smtp-server "smtp.gmail.com")
 (setq smtpmail-smtp-service 465)
 (setq smtpmail-stream-type 'ssl)
+
+;; Org mode
+(setq org-log-done "time") ; Display timestamp for finished TODO items
