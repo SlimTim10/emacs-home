@@ -160,3 +160,4 @@
 
 ;; Org mode
 (setq org-log-done "time") ; Display timestamp for finished TODO items
+(global-set-key (kbd "C-x l") 'org-store-link)
