@@ -1,4 +1,4 @@
-;;; 2014-09-22
+;;; 2015-02-03
 
 ;; Melpa
 (when (>= emacs-major-version 24)
@@ -161,3 +161,6 @@
 ;; Org mode
 (setq org-log-done "time") ; Display timestamp for finished TODO items
 (global-set-key (kbd "C-c l") 'org-store-link)
+(add-hook 'org-mode-hook
+    '(lambda ()
+       (local-set-key "\C-cc" 'org-capture)))
