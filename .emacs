@@ -167,4 +167,4 @@
 (setq org-capture-templates
       '(("j" "Journal Entry"
          entry (file+datetree buffer-file-name)
-         "* %?\n  %U")))
+         "* %?\n  %<%t%l:%M %p>")))
