@@ -162,5 +162,9 @@
 (setq org-log-done "time") ; Display timestamp for finished TODO items
 (global-set-key (kbd "C-c l") 'org-store-link)
 (add-hook 'org-mode-hook
-    '(lambda ()
-       (local-set-key "\C-cc" 'org-capture)))
+		  '(lambda ()
+			 (local-set-key "\C-cc" 'org-capture)))
+(setq org-capture-templates
+      '(("j" "Journal Entry"
+         entry (file+datetree buffer-file-name)
+         "* %?\n  %U")))
