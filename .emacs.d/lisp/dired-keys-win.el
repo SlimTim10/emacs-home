@@ -24,9 +24,6 @@
   (let* ((file-name (dired-get-file-for-visit))
 		 (file-type (shell-command-to-string (concat "file " (shell-quote-argument file-name)))))
 	(message file-name)
-	(sleep-for 3) ;;;
-	(message file-type) ;;;
-	(sleep-for 3) ;;;
 	;; Open text files, empty files, and directories in emacs, all other files in their default associated program
 	(if (or (string-match "text" file-type)
 			(string-match "empty" file-type)
