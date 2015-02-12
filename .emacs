@@ -166,3 +166,7 @@
       '(("j" "Journal Entry"
          entry (file+datetree buffer-file-name)
          "* %?\n  %<%t%l:%M %p>")))
+
+;; ace-jump-mode
+(require 'ace-jump-mode)
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
