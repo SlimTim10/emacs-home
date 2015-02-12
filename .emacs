@@ -1,4 +1,4 @@
-;;; 2015-02-03
+;;; 2015-02-11
 
 ;; Melpa
 (when (>= emacs-major-version 24)
@@ -77,8 +77,6 @@
 (global-set-key (kbd "C-x C-.") 'goto-last-change)
 (require 'search-files)
 (global-set-key (kbd "C-c s") 'search-files)
-(require 'dired-w32-open-file)
-(global-set-key (kbd "C-c RET") 'dired-w32-open-file)
 (require 'jump-to-window-configuration)
 (global-set-key (kbd "C-c 0") (lambda () (interactive) (jump-to-window-configuration ?0)))
 (global-set-key (kbd "C-c 1") (lambda () (interactive) (jump-to-window-configuration ?1)))

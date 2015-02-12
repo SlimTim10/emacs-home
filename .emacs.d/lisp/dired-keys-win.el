@@ -1,8 +1,8 @@
 ;;; dired-keys-win.el --- Easier way to open files (for Windows, using 'file' command from Cygwin)
-;; Copyright (C) 2014  SlimTim10
+;; Copyright (C) 2015  SlimTim10
 
 ;; Author: SlimTim10 <slimtim10@gmail.com>
-;; Created: 11 Sep 2014
+;; Created: 11 Feb 2015
 
 ;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -24,6 +24,9 @@
   (let* ((file-name (dired-get-file-for-visit))
 		 (file-type (shell-command-to-string (concat "file " (shell-quote-argument file-name)))))
 	(message file-name)
+	(sleep-for 3) ;;;
+	(message file-type) ;;;
+	(sleep-for 3) ;;;
 	;; Open text files, empty files, and directories in emacs, all other files in their default associated program
 	(if (or (string-match "text" file-type)
 			(string-match "empty" file-type)
@@ -31,10 +34,16 @@
 		(dired-find-file)
 	  (w32-shell-execute "open" file-name))))
 
+(defun dired-w32-open-file ()
+  "Open a file in Windows with default program."
+  (interactive)
+  (w32-shell-execute "open" (dired-get-filename nil t)))
+
 (defun dired-mode-keys ()
   "My keys for dired-mode."
   (interactive)
   (local-set-key (kbd "<return>") 'my-dired-operate-on-file)
+  (local-set-key (kbd "C-c RET") 'dired-w32-open-file)
 )
 
 (add-hook 'dired-mode-hook 'dired-mode-keys)
