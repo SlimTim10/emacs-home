@@ -1,4 +1,4 @@
-;;; 2015-03-02
+;;; 2015-03-12
 
 ;; Melpa
 (when (>= emacs-major-version 24)
