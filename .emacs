@@ -108,10 +108,6 @@
 (global-set-key (kbd "M-H") (lambda () (interactive) (enlarge-window -1 t)))
 (global-set-key (kbd "M-L") (lambda () (interactive) (enlarge-window 1 t)))
 
-;; My rebindings
-(global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
-(global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
-
 ;; Use monospaced font faces in current buffer
 (defun my-buffer-face-mode-fixed ()
   "Sets a fixed width (monospace) font in current buffer"
@@ -174,3 +170,8 @@
 ;; ace-jump-mode
 (require 'ace-jump-mode)
 (global-set-key (kbd "C-.") 'ace-jump-mode)
+
+;; My custom bindings
+(global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
+(global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
+(global-set-key (kbd "C-x g") 'magit-status)
