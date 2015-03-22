@@ -1,4 +1,4 @@
-;;; 2015-03-12
+;;; 2015-03-22
 
 ;; Melpa
 (when (>= emacs-major-version 24)
@@ -122,14 +122,12 @@
 (setq ls-lisp-format-time-list  '("%Y-%m-%d %l:%M %p" "%Y-%m-%d %l:%M %p")
       ls-lisp-use-localized-time-format t)
 (setq dired-dwim-target t) ; Try to guess a default target directory
+(setq dired-recursive-copies 'always) ; "always" means no asking
 (setq dired-recursive-deletes 'always) ; Delete recursively without asking
 (setq dired-isearch-filenames t) ; Limit search commands to file names
 (put 'dired-find-alternate-file 'disabled nil) ; Enable useful command
 ;; Set default font face for dired mode
 (add-hook 'dired-mode-hook 'my-buffer-face-mode-fixed)
-;; Allow dired to be able to delete or copy a whole dir
-(setq dired-recursive-copies (quote always)) ; "always" means no asking
-(setq dired-recursive-deletes (quote top)) ; "top" means ask once
 
 ;; Colour theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
