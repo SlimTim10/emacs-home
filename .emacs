@@ -177,10 +177,14 @@
 (require 'ace-jump-mode)
 (global-set-key (kbd "C-.") 'ace-jump-mode)
 
+;; Emacs Lisp mode
+(add-hook 'emacs-lisp-mode-hook
+		  (lambda ()
+			(local-set-key (kbd "C-c C-f") 'forward-sexp)
+			(local-set-key (kbd "C-c C-b") 'backward-sexp)))
+
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-c C-f") 'forward-sexp)
-(global-set-key (kbd "C-c C-b") 'backward-sexp)
