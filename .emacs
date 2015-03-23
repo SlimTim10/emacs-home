@@ -19,6 +19,8 @@
 ;; Auto-save and load desktop
 (require 'desktop)
 (desktop-save-mode 1)
+(setq desktop-path '("~/.emacs.d/"))
+(setq desktop-dirname "~/.emacs.d/")
 (defun my-desktop-save ()
   (interactive)
   ;; Don't call desktop-save-in-desktop-dir, as it prints a message.
@@ -27,10 +29,6 @@
 (add-hook 'auto-save-hook 'my-desktop-save)
 
 ;; Startup
-(add-hook 'auto-save-hook 'my-desktop-save)
-(setq desktop-path '("~/.emacs.d/"))
-(setq desktop-dirname "~/.emacs.d/")
-(desktop-save-mode 1)
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
 (setq visible-bell t)
@@ -38,7 +36,7 @@
 (menu-bar-mode -1)
 (hl-line-mode 1)
 (setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
-(display-time-mode t)
+(display-time-mode 1)
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
@@ -61,7 +59,7 @@
 			  c-tab-always-indent nil)
 
 ;; General programming
-(show-paren-mode t)
+(show-paren-mode 1)
 (setq show-paren-delay 0)
 
 ;; Handle wrapping in text mode
@@ -87,7 +85,7 @@
 (global-set-key (kbd "C-c 6") (lambda () (interactive) (jump-to-window-configuration ?6)))
 (global-set-key (kbd "C-c 7") (lambda () (interactive) (jump-to-window-configuration ?7)))
 (global-set-key (kbd "C-c 8") (lambda () (interactive) (jump-to-window-configuration ?8)))
-(global-set-key (kbd "C-c 9") (lambda () (interactive) (jump-to-window-configuration ?9)))
+(global-set-key (kbd "C-c 9") (lambda () (o-interactive) (jump-to-window-configuration ?9)))
 (require 'google)
 (global-set-key (kbd "C-c g") 'google)
 (require 'nzbsearch)
@@ -149,8 +147,8 @@
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
 ;; Modes
-(global-auto-revert-mode t) ; Good for git branch switching
-(winner-mode t)
+(global-auto-revert-mode 1) ; Good for git branch switching
+(winner-mode 1)
 
 ;; SMTP
 (setq smtpmail-smtp-server "smtp.gmail.com")
