@@ -182,3 +182,5 @@
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-c C-f") 'forward-sexp)
+(global-set-key (kbd "C-c C-b") 'backward-sexp)
