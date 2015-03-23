@@ -145,8 +145,8 @@
 ;; ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; Uniquify buffers
-(setq uniquify-buffer-name-style 'post-forward)
+;; Uniquify buffer names
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
 ;; Modes
 (global-auto-revert-mode t) ; Good for git branch switching
