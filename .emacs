@@ -1,4 +1,4 @@
-;;; 2015-03-22
+;;; 2015-03-23
 
 ;; Melpa
 (when (>= emacs-major-version 24)
@@ -34,7 +34,8 @@
 (setq visible-bell t)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
-(hl-line-mode 1)
+(global-hl-line-mode 1)
+(setq hl-line-sticky-flag nil)
 (setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
 (display-time-mode 1)
 (setq backup-directory-alist
