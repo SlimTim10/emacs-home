@@ -9,13 +9,13 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
-;; Automatically install packages
-(setq package-list '(helm))
-(package-initialize) ; Activate all the packages
-(package-refresh-contents) ; Fetch the list of packages available 
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package))) ; Install the missing packages
+;; ;; Automatically install packages
+;; (setq package-list '(helm))
+;; (package-initialize) ; Activate all the packages
+;; (package-refresh-contents) ; Fetch the list of packages available 
+;; (dolist (package package-list)
+;;   (unless (package-installed-p package)
+;;     (package-install package))) ; Install the missing packages
 
 ;; Auto-save and load desktop
 (require 'desktop)
@@ -138,17 +138,14 @@
 ;; helm
 (require 'helm-config)
 (helm-mode 1)
+(helm-autoresize-mode 1)
+(setq helm-buffer-max-length nil)
 (define-key global-map [remap find-file] 'helm-find-files)
 (define-key global-map [remap occur] 'helm-occur)
 (define-key global-map [remap list-buffers] 'helm-buffers-list)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "M-x") 'helm-M-x)
-
-;; ido
-;(require 'ido)
-;(ido-mode 1)
-;(ido-everywhere 1)
-;(setq ido-enable-flex-matching t) ; Fuzzy matching
-;(setq ido-auto-merge-work-directories-length -1) ; Don't search other directories when using find file
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
 ;; ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
