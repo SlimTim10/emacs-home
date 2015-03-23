@@ -1,20 +1,21 @@
 ;;; 2015-03-23
 
-;; Melpa
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
+;; Packages
+(require 'package)
+(add-to-list 'package-archives
+			 '("melpa" . "http://melpa.org/packages/") t)
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize)
 
 ;; Automatically install packages
-;(setq package-list '(helm))
-;(package-initialize) ; Activate all the packages
-;(unless package-archive-contents
-;  (package-refresh-contents)) ; Fetch the list of packages available 
-;(dolist (package package-list)
-;  (unless (package-installed-p package)
-;    (package-install package))) ; Install the missing packages
+(setq package-list '(helm))
+(package-initialize) ; Activate all the packages
+(package-refresh-contents) ; Fetch the list of packages available 
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package))) ; Install the missing packages
 
 ;; Auto-save and load desktop
 (require 'desktop)
@@ -42,7 +43,8 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+(let ((default-directory "~/.emacs.d/lisp/"))
+  (normal-top-level-add-subdirs-to-load-path))
 
 ;; Windows only
 (when (eq system-type 'windows-nt)
@@ -133,13 +135,20 @@
 (load-theme 'solarized-dark t)
 (set-cursor-color "#00e000") ; Grey cursor is hard to find sometimes
 
+;; helm
+(require 'helm-config)
+(helm-mode 1)
+(define-key global-map [remap find-file] 'helm-find-files)
+(define-key global-map [remap occur] 'helm-occur)
+(define-key global-map [remap list-buffers] 'helm-buffers-list)
+(global-set-key (kbd "M-x") 'helm-M-x)
+
 ;; ido
-(require 'ido)
-(ido-mode 1)
-(ido-everywhere 1)
-(setq ido-enable-flex-matching t) ; Fuzzy matching
-(setq ido-auto-merge-work-directories-length -1) ; Don't search other directories when using find file
-;(ido-mode 'buffers) ; Turn off ido for file names
+;(require 'ido)
+;(ido-mode 1)
+;(ido-everywhere 1)
+;(setq ido-enable-flex-matching t) ; Fuzzy matching
+;(setq ido-auto-merge-work-directories-length -1) ; Don't search other directories when using find file
 
 ;; ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
