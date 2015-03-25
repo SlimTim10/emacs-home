@@ -1,4 +1,4 @@
-;;; 2015-03-23
+;;; 2015-03-25
 
 ;; Packages
 (require 'package)
@@ -44,6 +44,7 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 (let ((default-directory "~/.emacs.d/lisp/"))
+  (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
 ;; Windows only
