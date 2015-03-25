@@ -1,4 +1,8 @@
 *
 !.gitignore
 !.emacs
-!.emacs.d/lisp/*
+!/.emacs.d/
+!/.emacs.d/lisp/
+!/.emacs.d/lisp/*
+!/.emacs.d/lisp/helm/
+!/.emacs.d/lisp/helm/*
