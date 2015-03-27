@@ -1,4 +1,4 @@
-;;; 2015-03-25
+;;; 2015-03-27
 
 ;; Packages
 (require 'package)
@@ -39,6 +39,7 @@
 (setq hl-line-sticky-flag nil)
 (setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
 (display-time-mode 1)
+(delete-selection-mode 1)
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
@@ -189,3 +190,17 @@
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-x g") 'magit-status)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+	("400b8fe34578070b21730ec2c5145e4ad552298d990d59ee2ba9bcad68c3e66a" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
