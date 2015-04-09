@@ -8,3 +8,5 @@
 !/.emacs.d/themes/*
 !/.emacs.d/lisp/helm/
 !/.emacs.d/lisp/helm/*
+!/.emacs.d/lisp/magit/
+!/.emacs.d/lisp/magit/*
