@@ -40,7 +40,7 @@
 (setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
 (display-time-mode 1)
 (delete-selection-mode 1)
-(electric-indent-mode 0)
+;(electric-indent-mode 0)
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
