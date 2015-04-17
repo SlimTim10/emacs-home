@@ -40,7 +40,6 @@
 (setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
 (display-time-mode 1)
 (delete-selection-mode 1)
-;(electric-indent-mode 0)
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
@@ -67,6 +66,8 @@
 ;; General programming
 (show-paren-mode 1)
 (setq show-paren-delay 0)
+(electric-indent-mode 1)
+(electric-pair-mode 1)
 
 ;; Handle wrapping in text mode
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
@@ -185,6 +186,14 @@
 		  (lambda ()
 			(local-set-key (kbd "C-c C-f") 'forward-sexp)
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)))
+
+;; Scheme mode
+(add-hook 'scheme-mode-hook
+		  (lambda ()
+			(local-set-key (kbd "C-c C-f") 'forward-sexp)
+			(local-set-key (kbd "C-c C-b") 'backward-sexp)
+			(local-set-key (kbd "C-c C-p") 'backward-up-list)
+			(local-set-key (kbd "C-c C-n") 'down-list)))
 
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
