@@ -1,4 +1,4 @@
-;;; 2015-04-17
+;;; 2015-04-19
 
 ;; Packages
 (require 'package)
@@ -9,8 +9,8 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
-;; ;; Automatically install packages
-;; (setq package-list '(helm))
+;; Automatically install packages
+;; (setq package-list '(magit))
 ;; (package-initialize) ; Activate all the packages
 ;; (package-refresh-contents) ; Fetch the list of packages available 
 ;; (dolist (package package-list)
@@ -35,6 +35,7 @@
 (setq visible-bell t)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+(scroll-bar-mode -1)
 (global-hl-line-mode 1)
 (setq hl-line-sticky-flag nil)
 (setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
@@ -151,6 +152,10 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
+;; magit
+(require 'magit)
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
@@ -199,5 +204,4 @@
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
 (global-set-key (kbd "M-/") 'hippie-expand)
-(global-set-key (kbd "C-x g") 'magit-status)
 (custom-set-variables

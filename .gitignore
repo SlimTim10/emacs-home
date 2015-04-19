@@ -10,3 +10,7 @@
 !/.emacs.d/lisp/helm/*
 !/.emacs.d/lisp/magit/
 !/.emacs.d/lisp/magit/*
+!/.emacs.d/lisp/git-commit-mode/
+!/.emacs.d/lisp/git-commit-mode/*
+!/.emacs.d/lisp/git-rebase-mode/
+!/.emacs.d/lisp/git-rebase-mode/*
