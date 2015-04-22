@@ -63,6 +63,7 @@
               tab-width 4
               indent-tabs-mode t
 			  c-tab-always-indent nil)
+(add-to-list 'auto-mode-alist '("\\.ino\\'" . c-mode)) ; Arduino
 
 ;; General programming
 (show-paren-mode 1)
