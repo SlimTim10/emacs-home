@@ -1,4 +1,4 @@
-;;; 2015-04-22
+;;; 2015-04-23
 
 ;; Packages
 (require 'package)
@@ -174,6 +174,7 @@
 
 ;; Org mode
 (setq org-log-done "time") ; Display timestamp for finished TODO items
+(setq org-src-fontify-natively t)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (add-hook 'org-mode-hook
 		  '(lambda ()
