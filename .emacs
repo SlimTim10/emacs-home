@@ -1,4 +1,4 @@
-;;; 2015-04-23
+;;; 2015-05-02
 
 ;; Packages
 (require 'package)
@@ -166,6 +166,7 @@
 ;; Modes
 (global-auto-revert-mode 1) ; Good for git branch switching
 (winner-mode 1)
+(global-set-key (kbd "C-c C-/") 'winner-undo)
 
 ;; SMTP
 (setq smtpmail-smtp-server "smtp.gmail.com")
