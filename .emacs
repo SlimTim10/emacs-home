@@ -109,6 +109,17 @@
 (load "headache-pressure-notify.el")
 (require 'headache-pressure-notify)
 
+;; Move forward in mark ring
+(defun unpop-to-mark-command ()
+  "Unpop off mark ring. Does nothing if mark ring is empty."
+  (interactive)
+      (when mark-ring
+        (setq mark-ring (cons (copy-marker (mark-marker)) mark-ring))
+        (set-marker (mark-marker) (car (last mark-ring)) (current-buffer))
+        (when (null (mark t)) (ding))
+        (setq mark-ring (nbutlast mark-ring))
+        (goto-char (marker-position (car (last mark-ring))))))
+
 ;; Easier window movement
 (global-set-key (kbd "M-J") (lambda () (interactive) (enlarge-window 1)))
 (global-set-key (kbd "M-K") (lambda () (interactive) (enlarge-window -1)))
@@ -207,3 +218,5 @@
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
 (global-set-key (kbd "M-/") 'hippie-expand)
+(global-set-key (kbd "C-<") 'pop-to-mark-command)
+(global-set-key (kbd "C->") 'unpop-to-mark-command)
