@@ -1,4 +1,4 @@
-;;; 2015-05-02
+;;; 2015-05-21
 
 ;; Packages
 (require 'package)
@@ -119,6 +119,15 @@
         (when (null (mark t)) (ding))
         (setq mark-ring (nbutlast mark-ring))
         (goto-char (marker-position (car (last mark-ring))))))
+
+;; Open MKV files
+(defun mkv-open ()
+  "Open a MKV file in a directory."
+  (interactive)
+  (dired-find-file)
+  (search-forward ".mkv")
+  (my-dired-operate-on-file)
+  (kill-buffer))
 
 ;; Easier window movement
 (global-set-key (kbd "M-J") (lambda () (interactive) (enlarge-window 1)))
