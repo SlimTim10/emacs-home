@@ -1,4 +1,4 @@
-;;; 2015-05-21
+;;; 2015-06-02
 
 ;; Packages
 (require 'package)
@@ -153,8 +153,13 @@
 (setq dired-recursive-deletes 'always) ; Delete recursively without asking
 (setq dired-isearch-filenames t) ; Limit search commands to file names
 (put 'dired-find-alternate-file 'disabled nil) ; Enable useful command
-;; Set default font face for dired mode
+; Set default font face for dired mode
 (add-hook 'dired-mode-hook 'my-buffer-face-mode-fixed)
+; My keys
+(add-hook 'dired-mode-hook
+		  (lambda ()
+			(local-set-key (kbd "C-c C-p") 'dired-prev-subdir)
+			(local-set-key (kbd "C-c C-n") 'dired-next-subdir)))
 
 ;; Colour theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
