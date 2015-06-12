@@ -1,6 +1,7 @@
 *
 !.gitignore
 !.emacs
+!*.ahk
 !/.emacs.d/
 !/.emacs.d/lisp/
 !/.emacs.d/lisp/*
