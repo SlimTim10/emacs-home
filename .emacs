@@ -64,6 +64,10 @@
               indent-tabs-mode t
 			  c-tab-always-indent nil)
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . c-mode)) ; Arduino
+(add-hook 'c-mode-hook
+		  (lambda ()
+			(local-set-key (kbd "C-c C-f") 'forward-sexp)
+			(local-set-key (kbd "C-c C-b") 'backward-sexp)))
 
 ;; General programming
 (show-paren-mode 1)
