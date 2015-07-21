@@ -1,4 +1,4 @@
-;;; 2015-07-15
+;;; 2015-07-21
 
 ;; Packages
 (require 'package)
@@ -214,9 +214,10 @@
          entry (file+datetree buffer-file-name)
          "* %?\n  %<%t%l:%M %p>")))
 
-;; ace-jump-mode
-(require 'ace-jump-mode)
-(global-set-key (kbd "C-.") 'ace-jump-mode)
+;; avy
+(require 'avy)
+(setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?q ?w ?e ?r ?u ?i ?o ?p))
+(global-set-key (kbd "C-.") 'avy-goto-char)
 
 ;; Emacs Lisp mode
 (add-hook 'emacs-lisp-mode-hook
