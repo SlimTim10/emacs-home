@@ -1,4 +1,4 @@
-;;; 2015-07-21
+;;; 2015-08-23
 
 ;; Packages
 (require 'package)
@@ -232,6 +232,11 @@
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)
 			(local-set-key (kbd "C-c C-p") 'backward-up-list)
 			(local-set-key (kbd "C-c C-n") 'down-list)))
+
+;; Projectile
+(require 'helm-projectile)
+(helm-projectile-on)
+(projectile-global-mode)
 
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
