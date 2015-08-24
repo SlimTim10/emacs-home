@@ -245,6 +245,20 @@
 	(erase-buffer)
 	(eshell-send-input)))
 
+;; Emmet
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ; Auto-start on any markup modes
+(add-hook 'css-mode-hook 'emmet-mode) ; Enable Emmet's css abbreviation
+(add-hook 'emmet-mode-hook
+		  (lambda ()
+			(local-set-key (kbd "C-c C-f") 'emmet-next-edit-point)
+			(local-set-key (kbd "C-c C-b") 'emmet-prev-edit-point)))
+(setq emmet-move-cursor-between-quotes t)
+
+;; Improved JavaScript editing mode
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
