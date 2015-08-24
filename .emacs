@@ -238,6 +238,13 @@
 (helm-projectile-on)
 (projectile-global-mode)
 
+;; Eshell
+(defun eshell/clear ()
+  "Clear the eshell buffer."
+  (let ((inhibit-read-only t))
+	(erase-buffer)
+	(eshell-send-input)))
+
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
