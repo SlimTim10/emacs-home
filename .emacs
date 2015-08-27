@@ -255,12 +255,6 @@
 			(local-set-key (kbd "C-c C-b") 'emmet-prev-edit-point)))
 (setq emmet-move-cursor-between-quotes t)
 
-;; Improved JavaScript editing mode
-(require 'js2-mode)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(custom-set-variables
- '(js2-global-externs (list "$")))
-
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
