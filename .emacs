@@ -258,6 +258,8 @@
 ;; Improved JavaScript editing mode
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(custom-set-variables
+ '(js2-global-externs (list "$")))
 
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
