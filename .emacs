@@ -258,6 +258,20 @@
 ;; PHP
 (require 'php-mode)
 
+;; HTML mode
+(add-hook 'html-mode-hook
+		  (lambda ()
+			(local-unset-key (kbd "C-c 0"))
+			(local-unset-key (kbd "C-c 1"))
+			(local-unset-key (kbd "C-c 2"))
+			(local-unset-key (kbd "C-c 3"))
+			(local-unset-key (kbd "C-c 4"))
+			(local-unset-key (kbd "C-c 5"))
+			(local-unset-key (kbd "C-c 6"))
+			(local-unset-key (kbd "C-c 7"))
+			(local-unset-key (kbd "C-c 8"))
+			(local-unset-key (kbd "C-c 9"))))
+
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
