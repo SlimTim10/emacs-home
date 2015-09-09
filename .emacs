@@ -150,6 +150,7 @@
 (require 'ls-lisp)
 (setq ls-lisp-use-insert-directory-program nil)
 (setq dired-listing-switches "-alhv")
+(setq ls-lisp-dirs-first t)
 (setq ls-lisp-format-time-list  '("%Y-%m-%d %l:%M %p" "%Y-%m-%d %l:%M %p")
       ls-lisp-use-localized-time-format t)
 (setq dired-dwim-target t) ; Try to guess a default target directory
