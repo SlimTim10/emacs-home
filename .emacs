@@ -250,10 +250,10 @@
 (require 'emmet-mode)
 (add-hook 'sgml-mode-hook 'emmet-mode) ; Auto-start on any markup modes
 (add-hook 'css-mode-hook 'emmet-mode) ; Enable Emmet's css abbreviation
-(add-hook 'emmet-mode-hook
+(add-hook 'sgml-mode-hook
 		  (lambda ()
-			(local-set-key (kbd "C-c C-f") 'emmet-next-edit-point)
-			(local-set-key (kbd "C-c C-b") 'emmet-prev-edit-point)))
+			(local-set-key (kbd "C-c C-f") 'sgml-skip-tag-forward)
+			(local-set-key (kbd "C-c C-b") 'sgml-skip-tag-backward)))
 (setq emmet-move-cursor-between-quotes t)
 
 ;; PHP
@@ -279,3 +279,4 @@
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-<") 'pop-to-mark-command)
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
+(custom-set-variables
