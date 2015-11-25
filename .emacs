@@ -1,4 +1,4 @@
-;;; 2015-08-23
+;;; 2015-11-25
 
 ;; Packages
 (require 'package)
@@ -279,4 +279,3 @@
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-<") 'pop-to-mark-command)
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
-(custom-set-variables
