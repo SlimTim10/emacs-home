@@ -1,4 +1,4 @@
-;;; 2015-11-26
+;;; 2015-11-27
 
 ;; Packages
 (require 'package)
@@ -38,8 +38,6 @@
 (scroll-bar-mode -1)
 (global-hl-line-mode 1)
 (setq hl-line-sticky-flag nil)
-(setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
-(display-time-mode 1)
 (delete-selection-mode 1)
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
@@ -48,6 +46,11 @@
 (let ((default-directory "~/.emacs.d/lisp/"))
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
+
+;; Mode line
+(setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
+(display-time-mode 1)
+(column-number-mode 1)
 
 ;; Windows only
 (when (eq system-type 'windows-nt)
@@ -249,6 +252,9 @@
   (let ((inhibit-read-only t))
 	(erase-buffer)
 	(eshell-send-input)))
+(add-hook 'eshell-mode-hook
+		  (lambda ()
+			(rename-buffer (concat (buffer-name) default-directory)))) ; Add directory path to buffer name
 
 ;; Emmet
 (require 'emmet-mode)
