@@ -1,4 +1,4 @@
-;;; 2015-11-25
+;;; 2015-11-26
 
 ;; Packages
 (require 'package)
@@ -56,6 +56,10 @@
 			   '(font . "Lucida Sans-10:demibold"))
   (setq delete-by-moving-to-trash t)
   (load "dired-keys-win.el")
+  (defun explore-directory ()
+	"Open Windows Explorer at current directory."
+	(interactive)
+	(w32-shell-execute "open" default-directory))
 )
 
 ;; C programming
