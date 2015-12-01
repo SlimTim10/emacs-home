@@ -105,7 +105,7 @@
 (global-set-key (kbd "C-c 6") (lambda () (interactive) (jump-to-window-configuration ?6)))
 (global-set-key (kbd "C-c 7") (lambda () (interactive) (jump-to-window-configuration ?7)))
 (global-set-key (kbd "C-c 8") (lambda () (interactive) (jump-to-window-configuration ?8)))
-(global-set-key (kbd "C-c 9") (lambda () (o-interactive) (jump-to-window-configuration ?9)))
+(global-set-key (kbd "C-c 9") (lambda () (interactive) (jump-to-window-configuration ?9)))
 (require 'google)
 (global-set-key (kbd "C-c g") 'google)
 (require 'nzbsearch)
