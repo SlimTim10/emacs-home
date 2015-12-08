@@ -1,4 +1,4 @@
-;;; 2015-11-27
+;;; 2015-12-08
 
 ;; Packages
 (require 'package)
@@ -282,6 +282,11 @@
 			(local-unset-key (kbd "C-c 7"))
 			(local-unset-key (kbd "C-c 8"))
 			(local-unset-key (kbd "C-c 9"))))
+
+;; GDB
+(setq gdb-many-windows t)
+(setq gud-gdb-command-name "arm-none-eabi-gdb -i=mi")
+
 
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
