@@ -1,4 +1,4 @@
-;;; 2015-12-08
+;;; 2015-12-09
 
 ;; Packages
 (require 'package)
@@ -253,8 +253,16 @@
 	(erase-buffer)
 	(eshell-send-input)))
 (add-hook 'eshell-mode-hook
-		  (lambda ()
-			(rename-buffer (concat (buffer-name) default-directory)))) ; Add directory path to buffer name
+		  (lambda ()					; Add directory path to buffer name
+			(let ((bufname (concat (buffer-name) default-directory)))
+			  (message bufname)
+			  (if (get-buffer bufname)
+				  (progn
+					(kill-buffer)
+					(switch-to-buffer bufname))
+				(rename-buffer bufname)))))
+;; (print eshell-mode-hook)
+;; (remove-hook 'eshell-mode-hook (first eshell-mode-hook))
 
 ;; Emmet
 (require 'emmet-mode)
