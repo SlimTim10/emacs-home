@@ -1,4 +1,4 @@
-;;; 2015-12-09
+;;; 2015-12-28
 
 ;; Packages
 (require 'package)
@@ -295,6 +295,18 @@
 (setq gdb-many-windows t)
 (setq gud-gdb-command-name "arm-none-eabi-gdb -i=mi")
 
+;; gtags
+(require 'helm-gtags)
+(add-hook 'c-mode-hook 'helm-gtags-mode)
+(custom-set-variables
+ '(helm-gtags-path-style 'relative)
+ '(helm-gtags-ignore-case t)
+ '(helm-gtags-auto-update t))
+(eval-after-load "helm-gtags"
+  '(progn
+	 (local-unset-key (kbd "M-."))
+	 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
+	 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
 
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
