@@ -314,3 +314,4 @@
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-<") 'pop-to-mark-command)
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
+(global-set-key (kbd "M-k") 'kill-this-buffer)
