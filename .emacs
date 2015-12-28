@@ -304,7 +304,6 @@
  '(helm-gtags-auto-update t))
 (eval-after-load "helm-gtags"
   '(progn
-	 (local-unset-key (kbd "M-."))
 	 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
 	 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
 
