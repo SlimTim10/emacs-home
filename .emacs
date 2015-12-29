@@ -298,6 +298,7 @@
 ;; gtags
 (require 'helm-gtags)
 (add-hook 'c-mode-hook 'helm-gtags-mode)
+(add-hook 'c++-mode-hook 'helm-gtags-mode)
 (custom-set-variables
  '(helm-gtags-path-style 'relative)
  '(helm-gtags-ignore-case t)
