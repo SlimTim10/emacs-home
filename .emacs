@@ -1,4 +1,4 @@
-;;; 2015-12-28
+;;; 2016-01-03
 
 ;; Packages
 (require 'package)
@@ -193,6 +193,7 @@
 ;; magit
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
+(setenv "SSH_ASKPASS" "git-gui--askpass")
 
 ;; ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
