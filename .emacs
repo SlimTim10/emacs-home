@@ -301,17 +301,12 @@
 (require 'helm-gtags)
 (add-hook 'c-mode-hook 'helm-gtags-mode)
 (add-hook 'c++-mode-hook 'helm-gtags-mode)
-(custom-set-variables
- '(helm-gtags-path-style 'relative)
- '(helm-gtags-ignore-case t)
- '(helm-gtags-auto-update t))
 (eval-after-load "helm-gtags"
   '(progn
 	 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
 	 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
 
 ;; Bookmarks
-(require 'bookmark+)
 (setq bookmark-save-flag 1)
 
 ;; My custom bindings
