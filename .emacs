@@ -43,9 +43,10 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
-(let ((default-directory "~/.emacs.d/lisp/"))
+(let ((default-directory "~/.emacs.d/lisp"))
   (normal-top-level-add-to-load-path '("."))
-  (normal-top-level-add-subdirs-to-load-path))
+  (normal-top-level-add-subdirs-to-load-path)
+  (delete-dups load-path))
 
 ;; Mode line
 (setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
@@ -115,10 +116,10 @@
 (require 'imdb)
 (require 'mail-me)
 (require 'my-mail-to)
-(load "kaleidoscopeflux-blog-notify.el")
-(require 'kaleidoscopeflux-blog-notify)
-(load "headache-pressure-notify.el")
-(require 'headache-pressure-notify)
+;; (load "kaleidoscopeflux-blog-notify.el")
+;; (require 'kaleidoscopeflux-blog-notify)
+;; (load "headache-pressure-notify.el")
+;; (require 'headache-pressure-notify)
 
 ;; Move forward in mark ring
 (defun unpop-to-mark-command ()
@@ -310,6 +311,7 @@
 	 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
 
 ;; Bookmarks
+(require 'bookmark+)
 (setq bookmark-save-flag 1)
 
 ;; My custom bindings
