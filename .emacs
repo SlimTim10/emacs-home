@@ -1,4 +1,4 @@
-;;; 2016-01-03
+;;; 2016-01-08
 
 ;; Packages
 (require 'package)
@@ -308,6 +308,9 @@
   '(progn
 	 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
 	 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
+
+;; Bookmarks
+(setq bookmark-save-flag 1)
 
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
