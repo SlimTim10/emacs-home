@@ -1,4 +1,4 @@
-;;; 2016-01-08
+;;; 2016-01-09
 
 ;; Packages
 (require 'package)
@@ -247,6 +247,7 @@
 (require 'helm-projectile)
 (helm-projectile-on)
 (projectile-global-mode)
+(setq projectile-switch-project-action 'projectile-dired)
 
 ;; Eshell
 (defun eshell/clear ()
