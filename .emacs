@@ -306,6 +306,11 @@
   '(progn
 	 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
 	 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
+(eval-after-load "grep"
+  '(progn
+	 (add-to-list 'grep-find-ignored-files "GPATH")
+	 (add-to-list 'grep-find-ignored-files "GTAGS")
+	 (add-to-list 'grep-find-ignored-files "GRTAGS")))
 
 ;; Bookmarks
 (setq bookmark-save-flag 1)
