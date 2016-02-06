@@ -278,7 +278,7 @@
 (setq emmet-move-cursor-between-quotes t)
 
 ;; PHP
-(require 'php-mode)
+;; (require 'php-mode)
 
 ;; HTML mode
 (add-hook 'html-mode-hook
@@ -293,6 +293,17 @@
 			(local-unset-key (kbd "C-c 7"))
 			(local-unset-key (kbd "C-c 8"))
 			(local-unset-key (kbd "C-c 9"))))
+
+;; web-mode
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (web-mode-use-tabs))
+(add-hook 'web-mode-hook  'my-web-mode-hook)
 
 ;; GDB
 (setq gdb-many-windows t)
