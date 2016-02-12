@@ -11,9 +11,9 @@
 !/.emacs.d/lisp/helm/*
 !/.emacs.d/lisp/magit/
 !/.emacs.d/lisp/magit/*
-!/.emacs.d/lisp/git-commit-mode/
-!/.emacs.d/lisp/git-commit-mode/*
-!/.emacs.d/lisp/git-rebase-mode/
-!/.emacs.d/lisp/git-rebase-mode/*
+!/.emacs.d/lisp/magit/lisp/
+!/.emacs.d/lisp/magit/lisp/*
+!/.emacs.d/lisp/magit/Documentation/
+!/.emacs.d/lisp/magit/Documentation/*
 !/.emacs.d/lisp/bookmark+/
 !/.emacs.d/lisp/bookmark+/*

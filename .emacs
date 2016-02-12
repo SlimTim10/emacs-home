@@ -1,4 +1,4 @@
-;;; 2016-01-09
+;;; 2016-01-11
 
 ;; Packages
 (require 'package)
@@ -191,7 +191,7 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
-;; magit
+;; ;; magit
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 (setenv "SSH_ASKPASS" "git-gui--askpass")
