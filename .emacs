@@ -1,4 +1,4 @@
-;;; 2016-01-11
+;;; 2016-03-15
 
 ;; Packages
 (require 'package)
@@ -39,6 +39,7 @@
 (global-hl-line-mode 1)
 (setq hl-line-sticky-flag nil)
 (delete-selection-mode 1)
+(setq confirm-kill-emacs #'y-or-n-p)
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
