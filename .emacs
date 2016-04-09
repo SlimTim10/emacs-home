@@ -78,6 +78,9 @@
 			(local-set-key (kbd "C-c C-f") 'forward-sexp)
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)))
 
+;; Ruby programming
+(require 'ruby-end)
+
 ;; General programming
 (show-paren-mode 1)
 (setq show-paren-delay 0)
