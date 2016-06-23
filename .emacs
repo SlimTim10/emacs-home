@@ -120,6 +120,7 @@
 (require 'imdb)
 (require 'mail-me)
 (require 'my-mail-to)
+(require 'calculate-money-earned)
 ;; (load "kaleidoscopeflux-blog-notify.el")
 ;; (require 'kaleidoscopeflux-blog-notify)
 ;; (load "headache-pressure-notify.el")
