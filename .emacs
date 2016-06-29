@@ -1,4 +1,4 @@
-;;; 2016-06-23
+;;; 2016-06-29
 
 ;; Packages
 (require 'package)
@@ -80,6 +80,9 @@
 
 ;; Ruby programming
 (require 'ruby-end)
+
+;; Javascript programming
+(setq js-indent-level 2)
 
 ;; General programming
 (show-paren-mode 1)
