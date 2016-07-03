@@ -1,4 +1,4 @@
-;;; 2016-06-29
+;;; 2016-07-03
 
 ;; Packages
 (require 'package)
@@ -83,6 +83,9 @@
 
 ;; Javascript programming
 (setq js-indent-level 2)
+
+;; C# programming
+(require 'csharp-mode)
 
 ;; General programming
 (show-paren-mode 1)
