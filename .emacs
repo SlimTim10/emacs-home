@@ -1,4 +1,4 @@
-;;; 2016-08-29
+;;; 2016-09-14
 
 ;; Packages
 (require 'package)
@@ -189,20 +189,43 @@
 (load-theme 'solarized-dark t)
 (set-cursor-color "#00e000") ; Grey cursor is hard to find sometimes
 
-;; helm
-(require 'helm-config)
-(helm-mode 1)
-(helm-autoresize-mode 1)
-(setq helm-buffer-max-length nil)
-(define-key global-map [remap find-file] 'helm-find-files)
-(define-key global-map [remap occur] 'helm-occur)
-(define-key global-map [remap list-buffers] 'helm-buffers-list)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "M-l") 'switch-to-buffer)
+;; ;; helm
+;; (require 'helm-config)
+;; (helm-mode 1)
+;; (helm-autoresize-mode 1)
+;; (setq helm-buffer-max-length nil)
+;; (define-key global-map [remap find-file] 'helm-find-files)
+;; (define-key global-map [remap occur] 'helm-occur)
+;; (define-key global-map [remap list-buffers] 'helm-buffers-list)
+;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
+;; (global-set-key (kbd "M-x") 'helm-M-x)
+;; (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+;; (global-set-key (kbd "M-l") 'switch-to-buffer)
 
-;; ;; magit
+;; Ivy, Counsel, Swiper
+(require 'ivy)
+(require 'counsel)
+(require 'swiper)
+(require 'colir)
+(require 'smex)
+(require 'flx)
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq ivy-height 10)
+(setq ivy-count-format "(%d/%d) ")
+;; ; Use flx for fuzzy matching
+;; (setq ivy-re-builders-alist
+;; 	  '((t . ivy--regex-fuzzy)))
+; Default matching where space is .*
+(setq ivy-re-builders-alist
+      '((t . ivy--regex-plus)))
+; No initial ^ character
+(setq ivy-initial-inputs-alist nil)
+(global-set-key (kbd "C-s") 'swiper)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+
+;; magit
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 (setenv "SSH_ASKPASS" "git-gui--askpass")
@@ -255,9 +278,9 @@
 			(local-set-key (kbd "C-c C-n") 'down-list)))
 
 ;; Projectile
-(require 'helm-projectile)
-(helm-projectile-on)
+(require 'counsel-projectile)
 (projectile-global-mode)
+(setq projectile-completion-system 'ivy)
 (setq projectile-switch-project-action 'projectile-dired)
 
 ;; Eshell
@@ -323,18 +346,18 @@
 (setq gud-gdb-command-name "arm-none-eabi-gdb -i=mi")
 
 ;; gtags
-(require 'helm-gtags)
-(add-hook 'c-mode-hook 'helm-gtags-mode)
-(add-hook 'c++-mode-hook 'helm-gtags-mode)
-(eval-after-load "helm-gtags"
-  '(progn
-	 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
-	 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
-(eval-after-load "grep"
-  '(progn
-	 (add-to-list 'grep-find-ignored-files "GPATH")
-	 (add-to-list 'grep-find-ignored-files "GTAGS")
-	 (add-to-list 'grep-find-ignored-files "GRTAGS")))
+;; (require 'helm-gtags)
+;; (add-hook 'c-mode-hook 'helm-gtags-mode)
+;; (add-hook 'c++-mode-hook 'helm-gtags-mode)
+;; (eval-after-load "helm-gtags"
+;;   '(progn
+;; 	 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
+;; 	 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
+;; (eval-after-load "grep"
+;;   '(progn
+;; 	 (add-to-list 'grep-find-ignored-files "GPATH")
+;; 	 (add-to-list 'grep-find-ignored-files "GTAGS")
+;; 	 (add-to-list 'grep-find-ignored-files "GRTAGS")))
 
 ;; Bookmarks
 (setq bookmark-save-flag 1)
@@ -351,3 +374,4 @@
 (global-set-key (kbd "C-<") 'pop-to-mark-command)
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
 (global-set-key (kbd "M-k") 'kill-this-buffer)
+(global-set-key (kbd "M-l") 'switch-to-buffer)
