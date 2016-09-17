@@ -1,4 +1,4 @@
-;;; 2016-09-14
+;;; 2016-09-17
 
 ;; Packages
 (require 'package)
@@ -82,7 +82,11 @@
 (require 'ruby-end)
 
 ;; Javascript programming
-(setq js-indent-level 2)
+(add-hook 'js-mode-hook
+		  (lambda ()
+			(setq indent-tabs-mode nil)
+			(setq js-indent-level 2)
+			(subword-mode 1)))
 
 ;; C# programming
 (require 'csharp-mode)
