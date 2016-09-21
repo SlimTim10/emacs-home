@@ -1,4 +1,4 @@
-;;; 2016-09-17
+;;; 2016-09-20
 
 ;; Packages
 (require 'package)
@@ -239,6 +239,10 @@
 
 ;; Uniquify buffer names
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+(defun my-rename-uniquely ()
+  (interactive)
+  (let ((current-folder (car (last (split-string default-directory "/") 2))))
+	(rename-buffer (concat (buffer-name) "<" current-folder ">"))))
 
 ;; Modes
 (global-auto-revert-mode 1) ; Good for git branch switching
