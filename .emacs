@@ -86,7 +86,9 @@
 		  (lambda ()
 			(setq indent-tabs-mode nil)
 			(setq js-indent-level 2)
-			(subword-mode 1)))
+			(subword-mode 1)
+			(local-set-key (kbd "C-c C-f") 'forward-sexp)
+			(local-set-key (kbd "C-c C-b") 'backward-sexp)))
 
 ;; C# programming
 (require 'csharp-mode)
