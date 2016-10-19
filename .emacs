@@ -93,6 +93,13 @@
 ;; C# programming
 (require 'csharp-mode)
 
+;; Python programming
+(add-hook 'python-mode-hook
+		  (lambda ()
+			(setq indent-tabs-mode nil)
+			(setq tab-width 4)))
+(setq gud-pdb-command-name "python -m pdb")
+
 ;; General programming
 (show-paren-mode 1)
 (setq show-paren-delay 0)
