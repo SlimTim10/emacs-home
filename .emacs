@@ -97,7 +97,10 @@
 (add-hook 'python-mode-hook
 		  (lambda ()
 			(setq indent-tabs-mode nil)
-			(setq tab-width 4)))
+			(setq tab-width 4)
+			(local-unset-key (kbd "C-c C-f"))
+			(local-set-key (kbd "C-c C-f") 'forward-sexp)
+			(local-set-key (kbd "C-c C-b") 'backward-sexp)))
 (setq gud-pdb-command-name "python -m pdb")
 
 ;; General programming
