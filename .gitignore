@@ -15,5 +15,5 @@
 !/.emacs.d/lisp/magit/lisp/*
 !/.emacs.d/lisp/magit/Documentation/
 !/.emacs.d/lisp/magit/Documentation/*
-!/.emacs.d/lisp/bookmark+/
-!/.emacs.d/lisp/bookmark+/*
+!/.emacs.d/lisp/ivy/
+!/.emacs.d/lisp/ivy/*
