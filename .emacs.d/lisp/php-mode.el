@@ -406,7 +406,7 @@ This variable can take one of the following symbol values:
     (define-key map [(control c) (control f)] 'php-search-documentation)
     (define-key map [(meta tab)] 'php-complete-function)
     (define-key map [(control c) (control m)] 'php-browse-manual)
-    (define-key map [(control .)] 'php-show-arglist)
+    ;; (define-key map [(control .)] 'php-show-arglist)
     (define-key map [(control c) (control r)] 'php-send-region)
     ;; Use the Emacs standard indentation binding. This may upset c-mode
     ;; which does not follow this at the moment, but I see no better
