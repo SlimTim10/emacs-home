@@ -1,4 +1,4 @@
-;;; 2016-09-20
+;;; 2017-01-11
 
 ;; Packages
 (require 'package)
@@ -332,7 +332,9 @@
 (setq emmet-move-cursor-between-quotes t)
 
 ;; PHP
-;; (require 'php-mode)
+(require 'php-mode)
+(add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
+(add-hook 'php-mode-hook 'php-enable-wordpress-coding-style)
 
 ;; HTML mode
 (add-hook 'html-mode-hook
@@ -350,7 +352,6 @@
 
 ;; web-mode
 (require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
