@@ -1,4 +1,4 @@
-;;; 2017-01-11
+;;; 2017-02-23
 
 ;; Packages
 (require 'package)
@@ -334,7 +334,7 @@
 ;; PHP
 (require 'php-mode)
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
-(add-hook 'php-mode-hook 'php-enable-wordpress-coding-style)
+(add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
 
 ;; HTML mode
 (add-hook 'html-mode-hook
