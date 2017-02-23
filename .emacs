@@ -65,6 +65,7 @@
 	"Open Windows Explorer at current directory."
 	(interactive)
 	(w32-shell-execute "open" default-directory))
+  (setq find-program "C:\\cygwin64\\bin\\find.exe")
 )
 
 ;; C programming
