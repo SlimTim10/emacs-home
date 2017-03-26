@@ -1,4 +1,4 @@
-;;; 2017-02-23
+;;; 2017-03-24
 
 ;; Packages
 (require 'package)
@@ -67,7 +67,62 @@
 	(interactive)
 	(w32-shell-execute "open" default-directory))
   (setq find-program "C:\\cygwin64\\bin\\find.exe")
-)
+  ;; Set default font face for dired mode
+  (add-hook 'dired-mode-hook 'my-buffer-face-mode-fixed)
+  )
+
+;; OS X only
+(when (eq system-type 'darwin)
+	(defun xah-open-in-external-app ()
+		"Open the current file or dired marked files in external app.
+The app is chosen from your OS's preference.
+URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
+Version 2016-10-15"
+		(interactive)
+		(let* (
+					 (-file-list
+						(if (string-equal major-mode "dired-mode")
+								(dired-get-marked-files)
+							(list (buffer-file-name))))
+					 (-do-it-p (if (<= (length -file-list) 5)
+												 t
+											 (y-or-n-p "Open more than 5 files? "))))
+			(when -do-it-p
+				(cond
+				 ((string-equal system-type "windows-nt")
+					(mapc
+					 (lambda (-fpath)
+						 (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" -fpath t t))) -file-list))
+				 ((string-equal system-type "darwin")
+					(mapc
+					 (lambda (-fpath)
+						 (shell-command
+							(concat "open " (shell-quote-argument -fpath))))  -file-list))
+				 ((string-equal system-type "gnu/linux")
+					(mapc
+					 (lambda (-fpath) (let ((process-connection-type nil))
+															(start-process "" nil "xdg-open" -fpath))) -file-list))))))
+
+	(defun xah-open-in-desktop ()
+		"Show current file in desktop (OS's file manager).
+URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
+Version 2015-11-30"
+		(interactive)
+		(cond
+		 ((string-equal system-type "windows-nt")
+			(w32-shell-execute "explore" (replace-regexp-in-string "/" "\\" default-directory t t)))
+		 ((string-equal system-type "darwin") (shell-command "open ."))
+		 ((string-equal system-type "gnu/linux")
+			(let (
+						(process-connection-type nil)
+						(openFileProgram (if (file-exists-p "/usr/bin/gvfs-open")
+																 "/usr/bin/gvfs-open"
+															 "/usr/bin/xdg-open")))
+				(start-process "" nil openFileProgram "."))
+			;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. For example: with nautilus
+			)))
+
+	(add-hook 'auto-save-hook 'desktop-save))
 
 ;; C programming
 (setq-default c-basic-offset 4
@@ -194,11 +249,10 @@
 (setq dired-recursive-deletes 'always) ; Delete recursively without asking
 (setq dired-isearch-filenames t) ; Limit search commands to file names
 (put 'dired-find-alternate-file 'disabled nil) ; Enable useful command
-; Set default font face for dired mode
-(add-hook 'dired-mode-hook 'my-buffer-face-mode-fixed)
 ; My keys
 (add-hook 'dired-mode-hook
 		  (lambda ()
+			(dired-hide-details-mode 1)
 			(local-set-key (kbd "C-c C-p") 'dired-prev-subdir)
 			(local-set-key (kbd "C-c C-n") 'dired-next-subdir)))
 
@@ -336,7 +390,7 @@
 ;; PHP
 (require 'php-mode)
 (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
-(add-hook 'php-mode-hook 'php-enable-symfony2-coding-style)
+(add-hook 'php-mode-hook 'php-enable-wordpress-coding-style)
 
 ;; HTML mode
 (add-hook 'html-mode-hook
@@ -357,10 +411,12 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
+  (setq indent-tabs-mode t)
+  (web-mode-use-tabs)
+  (setq-default tab-width 2)
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
-  (setq indent-tabs-mode nil)
   (emmet-mode))
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
