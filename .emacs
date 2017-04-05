@@ -1,4 +1,4 @@
-;;; 2017-03-24
+;;; 2017-04-03
 
 ;; Packages
 (require 'package)
@@ -336,7 +336,7 @@ Version 2015-11-30"
 
 ;; avy
 (require 'avy)
-(setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+(setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?q ?w ?r ?t ?y ?u ?i ?o ?p))
 (global-set-key (kbd "C-.") 'avy-goto-char)
 
 ;; Emacs Lisp mode
@@ -413,7 +413,7 @@ Version 2015-11-30"
   "Hooks for Web mode."
   (setq indent-tabs-mode t)
   (web-mode-use-tabs)
-  (setq-default tab-width 2)
+  (setq tab-width 2)
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
