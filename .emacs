@@ -73,56 +73,10 @@
 
 ;; OS X only
 (when (eq system-type 'darwin)
-	(defun xah-open-in-external-app ()
-		"Open the current file or dired marked files in external app.
-The app is chosen from your OS's preference.
-URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
-Version 2016-10-15"
-		(interactive)
-		(let* (
-					 (-file-list
-						(if (string-equal major-mode "dired-mode")
-								(dired-get-marked-files)
-							(list (buffer-file-name))))
-					 (-do-it-p (if (<= (length -file-list) 5)
-												 t
-											 (y-or-n-p "Open more than 5 files? "))))
-			(when -do-it-p
-				(cond
-				 ((string-equal system-type "windows-nt")
-					(mapc
-					 (lambda (-fpath)
-						 (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" -fpath t t))) -file-list))
-				 ((string-equal system-type "darwin")
-					(mapc
-					 (lambda (-fpath)
-						 (shell-command
-							(concat "open " (shell-quote-argument -fpath))))  -file-list))
-				 ((string-equal system-type "gnu/linux")
-					(mapc
-					 (lambda (-fpath) (let ((process-connection-type nil))
-															(start-process "" nil "xdg-open" -fpath))) -file-list))))))
-
-	(defun xah-open-in-desktop ()
-		"Show current file in desktop (OS's file manager).
-URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
-Version 2015-11-30"
-		(interactive)
-		(cond
-		 ((string-equal system-type "windows-nt")
-			(w32-shell-execute "explore" (replace-regexp-in-string "/" "\\" default-directory t t)))
-		 ((string-equal system-type "darwin") (shell-command "open ."))
-		 ((string-equal system-type "gnu/linux")
-			(let (
-						(process-connection-type nil)
-						(openFileProgram (if (file-exists-p "/usr/bin/gvfs-open")
-																 "/usr/bin/gvfs-open"
-															 "/usr/bin/xdg-open")))
-				(start-process "" nil openFileProgram "."))
-			;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. For example: with nautilus
-			)))
-
-	(add-hook 'auto-save-hook 'desktop-save))
+  ;; Set font
+  (add-to-list 'default-frame-alist
+			   '(font . "Lucida Grande"))
+  (add-hook 'auto-save-hook 'desktop-save))
 
 ;; C programming
 (setq-default c-basic-offset 4
@@ -141,11 +95,14 @@ Version 2015-11-30"
 ;; Javascript programming
 (add-hook 'js-mode-hook
 		  (lambda ()
-			(setq indent-tabs-mode nil)
-			(setq js-indent-level 2)
+			;; (setq indent-tabs-mode nil)
+			(setq indent-tabs-mode t)
+			;; (setq js-indent-level 2)
+			(setq js-indent-level 4)
 			(subword-mode 1)
 			(local-set-key (kbd "C-c C-f") 'forward-sexp)
-			(local-set-key (kbd "C-c C-b") 'backward-sexp)))
+			(local-set-key (kbd "C-c C-b") 'backward-sexp)
+			(buffer-face-mode 1)))
 
 ;; C# programming
 (require 'csharp-mode)
@@ -159,6 +116,57 @@ Version 2015-11-30"
 			(local-set-key (kbd "C-c C-f") 'forward-sexp)
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)))
 (setq gud-pdb-command-name "python -m pdb")
+
+;; PHP programming
+(require 'php-mode)
+(add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
+(add-hook 'php-mode-hook 'php-enable-wordpress-coding-style)
+(add-hook 'php-mode-hook
+		  (lambda ()
+			(set (make-local-variable 'company-backends)
+				 '((php-extras-company company-dabbrev-code) company-capf company-files))
+			(company-mode 1)
+			(setq company-idle-delay 0)
+			(buffer-face-mode 1)))
+
+;; Web programming
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(defun my-web-mode-hook ()
+  "Hooks for Web mode."
+  (setq indent-tabs-mode t)
+  (web-mode-use-tabs)
+  (setq tab-width 2)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (emmet-mode)
+  (buffer-face-mode 1))
+(add-hook 'web-mode-hook  'my-web-mode-hook)
+
+;; Emmet
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ; Auto-start on any markup modes
+(add-hook 'css-mode-hook 'emmet-mode) ; Enable Emmet's css abbreviation
+(add-hook 'sgml-mode-hook
+		  (lambda ()
+			(local-set-key (kbd "C-c C-f") 'sgml-skip-tag-forward)
+			(local-set-key (kbd "C-c C-b") 'sgml-skip-tag-backward)))
+(setq emmet-move-cursor-between-quotes t)
+
+;; HTML mode
+(add-hook 'html-mode-hook
+		  (lambda ()
+			(local-unset-key (kbd "C-c 0"))
+			(local-unset-key (kbd "C-c 1"))
+			(local-unset-key (kbd "C-c 2"))
+			(local-unset-key (kbd "C-c 3"))
+			(local-unset-key (kbd "C-c 4"))
+			(local-unset-key (kbd "C-c 5"))
+			(local-unset-key (kbd "C-c 6"))
+			(local-unset-key (kbd "C-c 7"))
+			(local-unset-key (kbd "C-c 8"))
+			(local-unset-key (kbd "C-c 9"))))
 
 ;; General programming
 (show-paren-mode 1)
@@ -282,7 +290,7 @@ Version 2015-11-30"
 (require 'smex)
 (require 'flx)
 (ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
+(setq ivy-use-virtual-buffers nil)
 (setq ivy-height 10)
 (setq ivy-count-format "(%d/%d) ")
 ;; ; Use flx for fuzzy matching
@@ -377,49 +385,6 @@ Version 2015-11-30"
 ;; (print eshell-mode-hook)
 ;; (remove-hook 'eshell-mode-hook (first eshell-mode-hook))
 
-;; Emmet
-(require 'emmet-mode)
-(add-hook 'sgml-mode-hook 'emmet-mode) ; Auto-start on any markup modes
-(add-hook 'css-mode-hook 'emmet-mode) ; Enable Emmet's css abbreviation
-(add-hook 'sgml-mode-hook
-		  (lambda ()
-			(local-set-key (kbd "C-c C-f") 'sgml-skip-tag-forward)
-			(local-set-key (kbd "C-c C-b") 'sgml-skip-tag-backward)))
-(setq emmet-move-cursor-between-quotes t)
-
-;; PHP
-(require 'php-mode)
-(add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
-(add-hook 'php-mode-hook 'php-enable-wordpress-coding-style)
-
-;; HTML mode
-(add-hook 'html-mode-hook
-		  (lambda ()
-			(local-unset-key (kbd "C-c 0"))
-			(local-unset-key (kbd "C-c 1"))
-			(local-unset-key (kbd "C-c 2"))
-			(local-unset-key (kbd "C-c 3"))
-			(local-unset-key (kbd "C-c 4"))
-			(local-unset-key (kbd "C-c 5"))
-			(local-unset-key (kbd "C-c 6"))
-			(local-unset-key (kbd "C-c 7"))
-			(local-unset-key (kbd "C-c 8"))
-			(local-unset-key (kbd "C-c 9"))))
-
-;; web-mode
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(defun my-web-mode-hook ()
-  "Hooks for Web mode."
-  (setq indent-tabs-mode t)
-  (web-mode-use-tabs)
-  (setq tab-width 2)
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (emmet-mode))
-(add-hook 'web-mode-hook  'my-web-mode-hook)
-
 ;; GDB
 (setq gdb-many-windows t)
 (setq gud-gdb-command-name "arm-none-eabi-gdb -i=mi")
@@ -445,6 +410,56 @@ Version 2015-11-30"
 (require 'keyfreq)
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
+
+;; Xah Lee's useful functions
+(defun xah-open-in-external-app ()
+  "Open the current file or dired marked files in external app.
+The app is chosen from your OS's preference.
+URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
+Version 2016-10-15"
+  (interactive)
+  (let* (
+		 (-file-list
+		  (if (string-equal major-mode "dired-mode")
+			  (dired-get-marked-files)
+			(list (buffer-file-name))))
+		 (-do-it-p (if (<= (length -file-list) 5)
+					   t
+					 (y-or-n-p "Open more than 5 files? "))))
+	(when -do-it-p
+	  (cond
+	   ((string-equal system-type "windows-nt")
+		(mapc
+		 (lambda (-fpath)
+		   (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" -fpath t t))) -file-list))
+	   ((string-equal system-type "darwin")
+		(mapc
+		 (lambda (-fpath)
+		   (shell-command
+			(concat "open " (shell-quote-argument -fpath))))  -file-list))
+	   ((string-equal system-type "gnu/linux")
+		(mapc
+		 (lambda (-fpath) (let ((process-connection-type nil))
+							(start-process "" nil "xdg-open" -fpath))) -file-list))))))
+
+(defun xah-open-in-desktop ()
+  "Show current file in desktop (OS's file manager).
+URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
+Version 2015-11-30"
+  (interactive)
+  (cond
+   ((string-equal system-type "windows-nt")
+	(w32-shell-execute "explore" (replace-regexp-in-string "/" "\\" default-directory t t)))
+   ((string-equal system-type "darwin") (shell-command "open ."))
+   ((string-equal system-type "gnu/linux")
+	(let (
+		  (process-connection-type nil)
+		  (openFileProgram (if (file-exists-p "/usr/bin/gvfs-open")
+							   "/usr/bin/gvfs-open"
+							 "/usr/bin/xdg-open")))
+	  (start-process "" nil openFileProgram "."))
+	;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. For example: with nautilus
+	)))
 
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
