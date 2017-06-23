@@ -1,4 +1,4 @@
-;;; 2017-04-03
+;;; 2017-06-22
 
 ;; Packages
 (require 'package)
@@ -89,6 +89,16 @@
 			(local-set-key (kbd "C-c C-f") 'forward-sexp)
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)))
 
+;; Haskell programming
+(defun my-haskell-doc-mode-hook ()
+  "Settings for haskell doc mode"
+  (setq haskell-doc-show-prelude nil)
+  (setq haskell-doc-show-prelude nil)
+  (setq haskell-doc-show-reserved nil)
+  (setq haskell-doc-show-strategy nil)
+  (setq haskell-doc-show-user-defined nil))
+(add-hook 'haskell-doc-mode-hook 'my-haskell-doc-mode-hook)
+
 ;; Ruby programming
 (require 'ruby-end)
 
@@ -133,7 +143,7 @@
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (defun my-web-mode-hook ()
-  "Hooks for Web mode."
+  "Settings for Web mode."
   (setq indent-tabs-mode t)
   (web-mode-use-tabs)
   (setq tab-width 2)
@@ -208,6 +218,7 @@
 (require 'mail-me)
 (require 'my-mail-to)
 (require 'calculate-money-earned)
+(require 'xah)
 ;; (load "kaleidoscopeflux-blog-notify.el")
 ;; (require 'kaleidoscopeflux-blog-notify)
 ;; (load "headache-pressure-notify.el")
@@ -410,56 +421,6 @@
 (require 'keyfreq)
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
-
-;; Xah Lee's useful functions
-(defun xah-open-in-external-app ()
-  "Open the current file or dired marked files in external app.
-The app is chosen from your OS's preference.
-URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
-Version 2016-10-15"
-  (interactive)
-  (let* (
-		 (-file-list
-		  (if (string-equal major-mode "dired-mode")
-			  (dired-get-marked-files)
-			(list (buffer-file-name))))
-		 (-do-it-p (if (<= (length -file-list) 5)
-					   t
-					 (y-or-n-p "Open more than 5 files? "))))
-	(when -do-it-p
-	  (cond
-	   ((string-equal system-type "windows-nt")
-		(mapc
-		 (lambda (-fpath)
-		   (w32-shell-execute "open" (replace-regexp-in-string "/" "\\" -fpath t t))) -file-list))
-	   ((string-equal system-type "darwin")
-		(mapc
-		 (lambda (-fpath)
-		   (shell-command
-			(concat "open " (shell-quote-argument -fpath))))  -file-list))
-	   ((string-equal system-type "gnu/linux")
-		(mapc
-		 (lambda (-fpath) (let ((process-connection-type nil))
-							(start-process "" nil "xdg-open" -fpath))) -file-list))))))
-
-(defun xah-open-in-desktop ()
-  "Show current file in desktop (OS's file manager).
-URL `http://ergoemacs.org/emacs/emacs_dired_open_file_in_ext_apps.html'
-Version 2015-11-30"
-  (interactive)
-  (cond
-   ((string-equal system-type "windows-nt")
-	(w32-shell-execute "explore" (replace-regexp-in-string "/" "\\" default-directory t t)))
-   ((string-equal system-type "darwin") (shell-command "open ."))
-   ((string-equal system-type "gnu/linux")
-	(let (
-		  (process-connection-type nil)
-		  (openFileProgram (if (file-exists-p "/usr/bin/gvfs-open")
-							   "/usr/bin/gvfs-open"
-							 "/usr/bin/xdg-open")))
-	  (start-process "" nil openFileProgram "."))
-	;; (shell-command "xdg-open .") ;; 2013-02-10 this sometimes froze emacs till the folder is closed. For example: with nautilus
-	)))
 
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
