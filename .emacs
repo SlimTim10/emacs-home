@@ -90,6 +90,7 @@
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)))
 
 ;; Haskell programming
+(require 'haskell-mode-autoloads)
 (defun my-haskell-doc-mode-hook ()
   "Settings for haskell doc mode"
   (setq haskell-doc-show-prelude nil)

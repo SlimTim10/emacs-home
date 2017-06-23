@@ -17,3 +17,5 @@
 !/.emacs.d/lisp/magit/Documentation/*
 !/.emacs.d/lisp/ivy/
 !/.emacs.d/lisp/ivy/*
+!/.emacs.d/lisp/haskell/
+!/.emacs.d/lisp/haskell/*
