@@ -113,7 +113,8 @@
 			(subword-mode 1)
 			(local-set-key (kbd "C-c C-f") 'forward-sexp)
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)
-			(buffer-face-mode 1)))
+			;; (buffer-face-mode 1)
+            ))
 
 ;; C# programming
 (require 'csharp-mode)
