@@ -106,10 +106,10 @@
 ;; Javascript programming
 (add-hook 'js-mode-hook
 		  (lambda ()
-			;; (setq indent-tabs-mode nil)
-			(setq indent-tabs-mode t)
-			;; (setq js-indent-level 2)
-			(setq js-indent-level 4)
+			(setq indent-tabs-mode nil)
+			;; (setq indent-tabs-mode t)
+			(setq js-indent-level 2)
+			;; (setq js-indent-level 4)
 			(subword-mode 1)
 			(local-set-key (kbd "C-c C-f") 'forward-sexp)
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)
