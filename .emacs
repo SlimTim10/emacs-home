@@ -97,7 +97,8 @@
   (setq haskell-doc-show-prelude nil)
   (setq haskell-doc-show-reserved nil)
   (setq haskell-doc-show-strategy nil)
-  (setq haskell-doc-show-user-defined nil))
+  (setq haskell-doc-show-user-defined nil)
+  (subword-mode 1))
 (add-hook 'haskell-doc-mode-hook 'my-haskell-doc-mode-hook)
 
 ;; Ruby programming
