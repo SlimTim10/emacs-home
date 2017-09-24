@@ -99,6 +99,10 @@
   (setq haskell-doc-show-user-defined nil)
   (subword-mode 1))
 (add-hook 'haskell-doc-mode-hook 'my-haskell-doc-mode-hook)
+(defun my-haskell-mode-hook ()
+  "Settings for haskell mode"
+  (haskell-doc-mode 1))
+(add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
 
 ;; Ruby programming
 (require 'ruby-end)
