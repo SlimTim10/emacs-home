@@ -94,7 +94,6 @@
 (defun my-haskell-doc-mode-hook ()
   "Settings for haskell doc mode"
   (setq haskell-doc-show-prelude nil)
-  (setq haskell-doc-show-prelude nil)
   (setq haskell-doc-show-reserved nil)
   (setq haskell-doc-show-strategy nil)
   (setq haskell-doc-show-user-defined nil)
