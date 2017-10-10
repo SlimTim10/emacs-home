@@ -358,6 +358,12 @@
       '(("j" "Journal Entry"
          entry (file+datetree buffer-file-name)
          "* %?\n  %<%t%l:%M %p>")))
+(setq org-todo-keywords
+ '((sequence "TODO" "IN-PROGRESS" "DONE"))
+ )
+(setq org-todo-keyword-faces
+ '(("IN-PROGRESS" . "orange"))
+ )
 
 ;; avy
 (require 'avy)
