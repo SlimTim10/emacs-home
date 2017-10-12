@@ -1,4 +1,4 @@
-;;; 2017-06-22
+;;; 2017-10-12
 
 ;; Packages
 (require 'package)
@@ -119,6 +119,7 @@
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)
 			;; (buffer-face-mode 1)
             ))
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-mode)) ; React JSX
 
 ;; C# programming
 (require 'csharp-mode)
