@@ -1,4 +1,4 @@
-;;; 2017-10-12
+;;; 2017-10-17
 
 ;; Packages
 (require 'package)
@@ -322,6 +322,7 @@
 (global-set-key (kbd "C-s") 'swiper)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "C-c C-j") 'ivy-immediate-done)
 
 ;; magit
 (require 'magit)
