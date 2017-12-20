@@ -1,13 +1,15 @@
-;;; 2017-10-17
+;;; 2017-12-20
 
 ;; Packages
 (require 'package)
-(add-to-list 'package-archives
-			 '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list
+ 'package-archives
+ '("melpa" . "http://melpa.org/packages/") t)
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
+(package-refresh-contents)
 
 ;; Automatically install packages
 ;; (setq package-list '(magit))
@@ -49,6 +51,7 @@
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path)
   (delete-dups load-path))
+(global-eldoc-mode -1)
 
 ;; Mode line
 (setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
@@ -90,19 +93,8 @@
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)))
 
 ;; Haskell programming
-(require 'haskell-mode-autoloads)
-(defun my-haskell-doc-mode-hook ()
-  "Settings for haskell doc mode"
-  (setq haskell-doc-show-prelude nil)
-  (setq haskell-doc-show-reserved nil)
-  (setq haskell-doc-show-strategy nil)
-  (setq haskell-doc-show-user-defined nil)
-  (subword-mode 1))
-(add-hook 'haskell-doc-mode-hook 'my-haskell-doc-mode-hook)
-(defun my-haskell-mode-hook ()
-  "Settings for haskell mode"
-  (haskell-doc-mode 1))
-(add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
+(package-install 'haskell-mode)
+(package-install 'intero)
 
 ;; Ruby programming
 (require 'ruby-end)
@@ -444,3 +436,15 @@
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
 (global-set-key (kbd "M-k") 'kill-this-buffer)
 (global-set-key (kbd "M-l") 'switch-to-buffer)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (haskell-mode intero color-theme async))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
