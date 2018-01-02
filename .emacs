@@ -1,4 +1,4 @@
-;;; 2017-12-20
+;;; 2018-01-01
 
 ;; Packages
 (require 'package)
@@ -95,6 +95,9 @@
 ;; Haskell programming
 (package-install 'haskell-mode)
 (package-install 'intero)
+(add-hook 'haskell-mode-hook
+		  (lambda ()
+			(subword-mode 1)))
 
 ;; Ruby programming
 (require 'ruby-end)
@@ -436,15 +439,3 @@
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
 (global-set-key (kbd "M-k") 'kill-this-buffer)
 (global-set-key (kbd "M-l") 'switch-to-buffer)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (haskell-mode intero color-theme async))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
