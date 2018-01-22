@@ -1,4 +1,4 @@
-;;; 2018-01-01
+;;; 2018-01-21
 
 ;; Packages
 (require 'package)
@@ -97,7 +97,12 @@
 (package-install 'intero)
 (add-hook 'haskell-mode-hook
 		  (lambda ()
-			(subword-mode 1)))
+			(subword-mode 1)
+			(local-unset-key (kbd "C-c C-f"))
+			(local-unset-key (kbd "C-c C-b"))
+			(local-set-key (kbd "C-c C-f") 'forward-sexp)
+			(local-set-key (kbd "C-c C-b") 'backward-sexp)
+			(local-set-key (kbd "C-c C-.") 'haskell-mode-jump-to-def)))
 
 ;; Ruby programming
 (require 'ruby-end)
@@ -114,7 +119,6 @@
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)
 			;; (buffer-face-mode 1)
             ))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . js-mode)) ; React JSX
 
 ;; C# programming
 (require 'csharp-mode)
