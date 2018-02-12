@@ -1,4 +1,4 @@
-;;; 2018-01-21
+;;; 2018-02-12
 
 ;; Packages
 (require 'package)
@@ -368,7 +368,7 @@
 
 ;; avy
 (require 'avy)
-(setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?q ?w ?r ?t ?y ?u ?i ?o ?p))
+(setq avy-keys '(?s ?d ?f ?g ?h ?j ?k ?l))
 (global-set-key (kbd "C-.") 'avy-goto-char)
 
 ;; Emacs Lisp mode
