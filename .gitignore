@@ -1,4 +1,5 @@
 *
+*.elc
 !.gitignore
 !.emacs
 !*.ahk
@@ -19,3 +20,5 @@
 !/.emacs.d/lisp/ivy/*
 !/.emacs.d/lisp/haskell/
 !/.emacs.d/lisp/haskell/*
+!/.emacs.d/lisp/use-package/
+!/.emacs.d/lisp/use-package/*

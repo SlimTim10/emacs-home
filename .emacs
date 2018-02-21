@@ -1,4 +1,4 @@
-;;; 2018-02-12
+;;; 2018-02-21
 
 ;; Packages
 (require 'package)
@@ -9,27 +9,7 @@
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
-(package-refresh-contents)
-
-;; Automatically install packages
-;; (setq package-list '(magit))
-;; (package-initialize) ; Activate all the packages
-;; (package-refresh-contents) ; Fetch the list of packages available 
-;; (dolist (package package-list)
-;;   (unless (package-installed-p package)
-;;     (package-install package))) ; Install the missing packages
-
-;; Auto-save and load desktop
-(require 'desktop)
-(desktop-save-mode 1)
-(setq desktop-path '("~/.emacs.d/"))
-(setq desktop-dirname "~/.emacs.d/")
-(defun my-desktop-save ()
-  (interactive)
-  ;; Don't call desktop-save-in-desktop-dir, as it prints a message.
-  (if (eq (desktop-owner) (emacs-pid))
-	  (desktop-save desktop-dirname)))
-(add-hook 'auto-save-hook 'my-desktop-save)
+;; (package-refresh-contents)
 
 ;; Startup
 (setq inhibit-startup-screen t)
@@ -52,6 +32,11 @@
   (normal-top-level-add-subdirs-to-load-path)
   (delete-dups load-path))
 (global-eldoc-mode -1)
+(global-auto-revert-mode 1) ; Good for git branch switching
+(winner-mode 1)
+(global-set-key (kbd "C-c C-/") 'winner-undo)
+(setq bookmark-save-flag 1)
+
 
 ;; Mode line
 (setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
@@ -81,6 +66,32 @@
 			   '(font . "Lucida Grande"))
   (add-hook 'auto-save-hook 'desktop-save))
 
+;; Handle wrapping in text mode
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+
+;; General programming
+(show-paren-mode 1)
+(setq show-paren-delay 0)
+(electric-indent-mode 1)
+(electric-pair-mode 1)
+
+(require 'use-package)
+
+;; Desktop mode
+(use-package desktop
+  :init
+  (setq desktop-path '("~/.emacs.d/"))
+  (setq desktop-dirname "~/.emacs.d/")
+  (defun my-desktop-save ()
+	(interactive)
+	;; Don't call desktop-save-in-desktop-dir, as it prints a message.
+	(if (eq (desktop-owner) (emacs-pid))
+		(desktop-save desktop-dirname)))
+  (add-hook 'auto-save-hook 'my-desktop-save)
+  :config
+  (desktop-save-mode 1) ; Auto-save
+  )
+
 ;; C programming
 (setq-default c-basic-offset 4
               tab-width 4
@@ -93,9 +104,9 @@
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)))
 
 ;; Haskell programming
-(package-install 'haskell-mode)
-(package-install 'intero)
-(add-hook 'haskell-mode-hook
+(use-package haskell-mode
+  :config
+  (add-hook 'haskell-mode-hook
 		  (lambda ()
 			(subword-mode 1)
 			(local-unset-key (kbd "C-c C-f"))
@@ -103,9 +114,11 @@
 			(local-set-key (kbd "C-c C-f") 'forward-sexp)
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)
 			(local-set-key (kbd "C-c C-.") 'haskell-mode-jump-to-def)))
+  )
+;; (package-install 'intero)
 
 ;; Ruby programming
-(require 'ruby-end)
+(use-package ruby-end)
 
 ;; Javascript programming
 (add-hook 'js-mode-hook
@@ -118,10 +131,10 @@
 			(local-set-key (kbd "C-c C-f") 'forward-sexp)
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)
 			;; (buffer-face-mode 1)
-            ))
+			))
 
 ;; C# programming
-(require 'csharp-mode)
+(use-package csharp-mode)
 
 ;; Python programming
 (add-hook 'python-mode-hook
@@ -134,41 +147,47 @@
 (setq gud-pdb-command-name "python -m pdb")
 
 ;; PHP programming
-(require 'php-mode)
-(add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
-(add-hook 'php-mode-hook 'php-enable-wordpress-coding-style)
-(add-hook 'php-mode-hook
-		  (lambda ()
-			(set (make-local-variable 'company-backends)
-				 '((php-extras-company company-dabbrev-code) company-capf company-files))
-			(company-mode 1)
-			(setq company-idle-delay 0)
-			(buffer-face-mode 1)))
+(use-package php-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
+  (add-hook 'php-mode-hook 'php-enable-wordpress-coding-style)
+  (add-hook 'php-mode-hook
+			(lambda ()
+			  (set (make-local-variable 'company-backends)
+				   '((php-extras-company company-dabbrev-code) company-capf company-files))
+			  (company-mode 1)
+			  (setq company-idle-delay 0)
+			  (buffer-face-mode 1)))
+  )
 
 ;; Web programming
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(defun my-web-mode-hook ()
-  "Settings for Web mode."
-  (setq indent-tabs-mode t)
-  (web-mode-use-tabs)
-  (setq tab-width 2)
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (emmet-mode)
-  (buffer-face-mode 1))
-(add-hook 'web-mode-hook  'my-web-mode-hook)
+(use-package web-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (defun my-web-mode-hook ()
+	"Settings for Web mode."
+	(setq indent-tabs-mode t)
+	(web-mode-use-tabs)
+	(setq tab-width 2)
+	(setq web-mode-markup-indent-offset 2)
+	(setq web-mode-css-indent-offset 2)
+	(setq web-mode-code-indent-offset 2)
+	(emmet-mode)
+	(buffer-face-mode 1))
+  (add-hook 'web-mode-hook  'my-web-mode-hook)
+  )
 
 ;; Emmet
-(require 'emmet-mode)
-(add-hook 'sgml-mode-hook 'emmet-mode) ; Auto-start on any markup modes
-(add-hook 'css-mode-hook 'emmet-mode) ; Enable Emmet's css abbreviation
-(add-hook 'sgml-mode-hook
-		  (lambda ()
-			(local-set-key (kbd "C-c C-f") 'sgml-skip-tag-forward)
-			(local-set-key (kbd "C-c C-b") 'sgml-skip-tag-backward)))
-(setq emmet-move-cursor-between-quotes t)
+(use-package emmet-mode
+  :config
+  (add-hook 'sgml-mode-hook 'emmet-mode) ; Auto-start on any markup modes
+  (add-hook 'css-mode-hook 'emmet-mode) ; Enable Emmet's css abbreviation
+  (add-hook 'sgml-mode-hook
+			(lambda ()
+			  (local-set-key (kbd "C-c C-f") 'sgml-skip-tag-forward)
+			  (local-set-key (kbd "C-c C-b") 'sgml-skip-tag-backward)))
+  (setq emmet-move-cursor-between-quotes t)
+  )
 
 ;; HTML mode
 (add-hook 'html-mode-hook
@@ -184,23 +203,12 @@
 			(local-unset-key (kbd "C-c 8"))
 			(local-unset-key (kbd "C-c 9"))))
 
-;; General programming
-(show-paren-mode 1)
-(setq show-paren-delay 0)
-(electric-indent-mode 1)
-(electric-pair-mode 1)
-
-;; Handle wrapping in text mode
-(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
-
 ;; Quick way to reload .emacs configuration
 (defun reload-emacs ()
   (interactive)
   (load-file "~/.emacs"))
 
 ;; Personal packages
-(require 'goto-last-change)
-(global-set-key (kbd "C-x C-.") 'goto-last-change)
 (require 'search-files)
 (global-set-key (kbd "C-c s") 'search-files)
 (require 'jump-to-window-configuration)
@@ -300,33 +308,40 @@
 ;; (global-set-key (kbd "M-l") 'switch-to-buffer)
 
 ;; Ivy, Counsel, Swiper
-(require 'ivy)
-(require 'counsel)
-(require 'swiper)
-(require 'colir)
-(require 'smex)
-(require 'flx)
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers nil)
-(setq ivy-height 10)
-(setq ivy-count-format "(%d/%d) ")
-;; ; Use flx for fuzzy matching
-;; (setq ivy-re-builders-alist
-;; 	  '((t . ivy--regex-fuzzy)))
-; Default matching where space is .*
-(setq ivy-re-builders-alist
-      '((t . ivy--regex-plus)))
-; No initial ^ character
-(setq ivy-initial-inputs-alist nil)
-(global-set-key (kbd "C-s") 'swiper)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "C-c C-j") 'ivy-immediate-done)
+(use-package ivy
+  :init
+  (setq ivy-use-virtual-buffers nil)
+  (setq ivy-height 10)
+  (setq ivy-count-format "(%d/%d) ")
+  ;; ; Use flx for fuzzy matching
+  ;; (setq ivy-re-builders-alist
+  ;; 	  '((t . ivy--regex-fuzzy))) ; Default matching where space is .*
+  (setq ivy-re-builders-alist
+		'((t . ivy--regex-plus))) ; No initial ^ character
+  (setq ivy-initial-inputs-alist nil)
+  (global-set-key (kbd "C-c C-j") 'ivy-immediate-done)
+  :config
+  (ivy-mode 1)
+  )
+(use-package counsel
+  :init
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  )
+(use-package swiper
+  :init
+  (global-set-key (kbd "C-s") 'swiper)
+  )
+(use-package colir)
+(use-package smex)
+(use-package flx)
 
 ;; magit
-(require 'magit)
-(global-set-key (kbd "C-x g") 'magit-status)
-(setenv "SSH_ASKPASS" "git-gui--askpass")
+(use-package magit
+  :init
+  (global-set-key (kbd "C-x g") 'magit-status)
+  (setenv "SSH_ASKPASS" "git-gui--askpass")
+  )
 
 ;; ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
@@ -337,11 +352,6 @@
   (interactive)
   (let ((current-folder (car (last (split-string default-directory "/") 2))))
 	(rename-buffer (concat (buffer-name) "<" current-folder ">"))))
-
-;; Modes
-(global-auto-revert-mode 1) ; Good for git branch switching
-(winner-mode 1)
-(global-set-key (kbd "C-c C-/") 'winner-undo)
 
 ;; SMTP
 (setq smtpmail-smtp-server "smtp.gmail.com")
@@ -367,9 +377,11 @@
  )
 
 ;; avy
-(require 'avy)
-(setq avy-keys '(?s ?d ?f ?g ?h ?j ?k ?l))
-(global-set-key (kbd "C-.") 'avy-goto-char)
+(use-package avy
+  :init
+  (setq avy-keys '(?s ?d ?f ?g ?h ?j ?k ?l))
+  (global-set-key (kbd "C-.") 'avy-goto-char)
+  )
 
 ;; Emacs Lisp mode
 (add-hook 'emacs-lisp-mode-hook
@@ -386,10 +398,13 @@
 			(local-set-key (kbd "C-c C-n") 'down-list)))
 
 ;; Projectile
-(require 'counsel-projectile)
-(projectile-global-mode)
-(setq projectile-completion-system 'ivy)
-(setq projectile-switch-project-action 'projectile-dired)
+(use-package counsel-projectile
+  :init
+  (setq projectile-completion-system 'ivy)
+  (setq projectile-switch-project-action 'projectile-dired)
+  :config
+  (projectile-global-mode)
+  )
 
 ;; Eshell
 (defun eshell/clear ()
@@ -427,14 +442,6 @@
 ;; 	 (add-to-list 'grep-find-ignored-files "GTAGS")
 ;; 	 (add-to-list 'grep-find-ignored-files "GRTAGS")))
 
-;; Bookmarks
-(setq bookmark-save-flag 1)
-
-;; keyfreq
-(require 'keyfreq)
-(keyfreq-mode 1)
-(keyfreq-autosave-mode 1)
-
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
@@ -443,3 +450,15 @@
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
 (global-set-key (kbd "M-k") 'kill-this-buffer)
 (global-set-key (kbd "M-l") 'switch-to-buffer)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (web-mode rjsx-mode intero color-theme async))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
