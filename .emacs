@@ -1,4 +1,4 @@
-;;; 2018-02-27
+;;; 2018-04-28
 
 ;; Packages
 (require 'package)
@@ -335,6 +335,9 @@
 (use-package colir)
 (use-package smex)
 (use-package flx)
+
+;; eyebrowse
+(eyebrowse-mode t)
 
 ;; magit
 (use-package magit
