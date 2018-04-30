@@ -1,4 +1,4 @@
-;;; 2018-04-28
+;;; 2018-04-30
 
 ;; Packages
 (require 'package)
@@ -42,6 +42,8 @@
 (setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
 (display-time-mode 1)
 (column-number-mode 1)
+(set-face-attribute 'mode-line nil :height 80)
+(set-face-attribute 'mode-line-inactive nil :height 80)
 
 ;; Windows only
 (when (eq system-type 'windows-nt)
