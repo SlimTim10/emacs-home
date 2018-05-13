@@ -1,4 +1,4 @@
-;;; 2018-04-30
+;;; 2018-05-13
 
 ;; Packages
 (require 'package)
@@ -432,6 +432,20 @@
 ;; GDB
 (setq gdb-many-windows t)
 (setq gud-gdb-command-name "arm-none-eabi-gdb -i=mi")
+
+;; Expand
+(require 'setup-hippie)
+(setq hippie-expand-try-functions-list
+	  '(try-expand-dabbrev-closest-first
+		try-expand-line-closest-first
+		try-expand-dabbrev-from-kill
+		try-complete-file-name-partially
+		try-complete-file-name
+		try-expand-dabbrev-all-buffers
+		try-expand-all-abbrevs
+		try-expand-list
+		try-complete-lisp-symbol-partially
+		try-complete-lisp-symbol))
 
 ;; gtags
 ;; (require 'helm-gtags)
