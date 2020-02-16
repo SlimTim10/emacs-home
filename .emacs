@@ -102,6 +102,7 @@
 (add-to-list 'auto-mode-alist '("\\.ino\\'" . c-mode)) ; Arduino
 (add-hook 'c-mode-hook
 		  (lambda ()
+			(subword-mode 1)
 			(local-set-key (kbd "C-c C-f") 'forward-sexp)
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)))
 
