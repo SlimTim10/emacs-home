@@ -1,4 +1,4 @@
-;;; 2018-05-13
+;;; 2020-03-26
 
 ;; Packages
 (require 'package)
@@ -461,6 +461,11 @@
 		try-expand-list
 		try-complete-lisp-symbol-partially
 		try-complete-lisp-symbol))
+
+;; YAML mode
+(add-hook 'yaml-mode-hook
+		  (lambda ()
+			(define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; gtags
 ;; (require 'helm-gtags)
