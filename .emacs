@@ -1,5 +1,3 @@
-;;; 2020-03-26
-
 ;; Packages
 (require 'package)
 (add-to-list
@@ -400,7 +398,7 @@
 (use-package avy
   :init
   (setq avy-keys '(?s ?d ?f ?g ?h ?j ?k ?l))
-  (global-set-key (kbd "C-.") 'avy-goto-char)
+  (global-set-key (kbd "C-.") 'avy-goto-word-1)
   )
 
 ;; Emacs Lisp mode
