@@ -35,8 +35,9 @@
   (delete-dups load-path))
 (global-eldoc-mode -1)
 (global-auto-revert-mode 1) ; Good for git branch switching
-(winner-mode 1)
-(global-set-key (kbd "C-c C-/") 'winner-undo)
+;; Incompatible with perspective mode
+;; (winner-mode 1)
+;; (global-set-key (kbd "C-c C-/") 'winner-undo)
 (setq bookmark-save-flag 1)
 
 
@@ -67,8 +68,7 @@
 (when (eq system-type 'darwin)
   ;; Set font
   (add-to-list 'default-frame-alist
-			   '(font . "Lucida Grande"))
-  (add-hook 'auto-save-hook 'desktop-save))
+			   '(font . "Lucida Grande")))
 
 ;; Handle wrapping in text mode
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
@@ -95,6 +95,9 @@
   :config
   (desktop-save-mode 1) ; Auto-save
   )
+
+;; eyebrowse
+;; (eyebrowse-mode t)
 
 ;; C programming
 (setq-default c-basic-offset 4
@@ -355,8 +358,30 @@
 (use-package smex)
 (use-package flx)
 
-;; eyebrowse
-(eyebrowse-mode t)
+;; Perspective mode
+(use-package perspective
+  :bind
+  ("C-c w ." . persp-switch)
+  ("C-c w \"" . persp-kill)
+  ("C-c w ," . persp-rename)
+  ("M-l" . persp-ivy-switch-buffer)
+  ("C-x b" . persp-ivy-switch-buffer)
+  :init
+  (setq persp-state-default-file "~/.emacs.d/.emacs.perspective")
+  (add-hook 'auto-save-hook #'persp-state-save)
+  :config
+  (persp-mode))
+(global-set-key
+ (kbd "C-x C-b")
+ (lambda (arg)
+   (interactive "P")
+   (if (fboundp 'persp-bs-show)
+	   (persp-bs-show arg)
+	 (bs-show "all"))))
+(setq display-buffer-alist
+      '((".*" (display-buffer-reuse-window display-buffer-same-window))))
+(setq display-buffer-reuse-frames t)         ; reuse windows in other frames
+(setq even-window-sizes nil)                 ; display-buffer: avoid resizing
 
 ;; magit
 (use-package magit
@@ -524,4 +549,3 @@ behavior added."
 (global-set-key (kbd "C-<") 'pop-to-mark-command)
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
 (global-set-key (kbd "M-k") 'kill-this-buffer)
-(global-set-key (kbd "M-l") 'switch-to-buffer)
