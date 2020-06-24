@@ -35,9 +35,8 @@
   (delete-dups load-path))
 (global-eldoc-mode -1)
 (global-auto-revert-mode 1) ; Good for git branch switching
-;; Incompatible with perspective mode
-;; (winner-mode 1)
-;; (global-set-key (kbd "C-c C-/") 'winner-undo)
+(winner-mode 1)
+(global-set-key (kbd "C-c C-/") 'winner-undo)
 (setq bookmark-save-flag 1)
 
 
