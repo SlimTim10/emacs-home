@@ -41,11 +41,44 @@
 
 
 ;; Mode line
-(setq display-time-format "%t%l:%M %p%t%A, %B %e, %Y%t")
+(setq display-time-format "%l:%M %p  %a, %b %e, %Y")
+(setq display-time-default-load-average nil)
 (display-time-mode 1)
 (column-number-mode 1)
 (set-face-attribute 'mode-line nil :height 80)
 (set-face-attribute 'mode-line-inactive nil :height 80)
+(setq
+ mode-line-position
+ '(("%p")
+   "  "
+   (line-number-mode ("(%l" (column-number-mode ",%c)")))))
+;; Remove minor modes
+(setq
+ mode-line-modes
+ (mapcar
+  (lambda (elem)
+	(pcase elem
+	  (`(:propertize (,_ minor-mode-alist . ,_) . ,_)
+	   "")
+	  (t elem)))
+  mode-line-modes))
+(persp-turn-off-modestring)
+(setq-default
+ mode-line-format
+ '("%e"
+   mode-line-front-space
+   ;; mode-line-mule-info
+   ;; mode-line-client
+   mode-line-modified
+   ;; mode-line-remote
+   ;; mode-line-frame-identification
+   mode-line-buffer-identification
+   mode-line-position
+   (vc-mode vc-mode)
+   "  "
+   mode-line-modes
+   mode-line-misc-info
+   mode-line-end-spaces))
 
 ;; Windows only
 (when (eq system-type 'windows-nt)
