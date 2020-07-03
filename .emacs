@@ -62,7 +62,6 @@
 	   "")
 	  (t elem)))
   mode-line-modes))
-(persp-turn-off-modestring)
 (setq-default
  mode-line-format
  '("%e"
@@ -400,9 +399,10 @@
   ("C-x b" . persp-ivy-switch-buffer)
   :init
   (setq persp-state-default-file "~/.emacs.d/.emacs.perspective")
-  (add-hook 'auto-save-hook #'persp-state-save)
   :config
-  (persp-mode))
+  (persp-mode)
+  (add-hook 'auto-save-hook #'persp-state-save)
+  (persp-turn-off-modestring))
 (global-set-key
  (kbd "C-x C-b")
  (lambda (arg)
