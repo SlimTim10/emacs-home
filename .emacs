@@ -439,11 +439,9 @@
 
 ;; Org mode
 (setq my-org-path '("~/Dropbox/org/"))
-(setq org-agenda-files my-org-path)
 (setq org-log-done "time") ; Display timestamp for finished TODO items
 (setq org-src-fontify-natively t)
 (global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a") 'org-agenda)
 (add-hook 'org-mode-hook
 		  '(lambda ()
 			 (local-set-key "\C-cc" 'org-capture)))
@@ -457,9 +455,13 @@
 (setq org-todo-keyword-faces
  '(("IN-PROGRESS" . "orange"))
  )
-(setq org-sort-agenda-notime-is-late nil) ; Items without time are put at the top of the day
 (add-hook 'calendar-mode-hook #'buffer-face-mode)
 (add-hook 'org-agenda-mode-hook #'buffer-face-mode)
+
+;; Agenda
+(global-set-key (kbd "C-c a") 'org-agenda)
+(setq org-agenda-files my-org-path)
+(setq org-sort-agenda-notime-is-late nil) ; Items without time are put at the top of the day
 
 ;; avy
 (use-package avy
