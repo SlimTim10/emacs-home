@@ -156,10 +156,16 @@
   )
 ;; (package-install 'intero)
 
+;; JavaScript/React programming
+(use-package js2-mode
+  :init
+  (setq js2-strict-missing-semi-warning nil))
+(use-package rjsx-mode)
+
 ;; Ruby programming
 (use-package ruby-end)
 
-;; Javascript programming
+;; JavaScript programming
 (add-hook 'js-mode-hook
 		  (lambda ()
 			(setq indent-tabs-mode nil)
@@ -402,7 +408,8 @@
   :config
   (persp-mode)
   (add-hook 'auto-save-hook #'persp-state-save)
-  (persp-turn-off-modestring))
+  (persp-turn-off-modestring)
+  (persp-state-load persp-state-default-file))
 (global-set-key
  (kbd "C-x C-b")
  (lambda (arg)
