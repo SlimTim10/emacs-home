@@ -455,13 +455,20 @@
 (setq org-todo-keyword-faces
  '(("IN-PROGRESS" . "orange"))
  )
-(add-hook 'calendar-mode-hook #'buffer-face-mode)
-(add-hook 'org-agenda-mode-hook #'buffer-face-mode)
+(setq
+ org-file-apps
+ '((auto-mode . emacs)
+   ("\\.x?html?\\'" . default)
+   ("\\.pdf\\'" . default)
+   ("\\.mp4\\'" . default)
+   ("\\.jpg\\'" . default)))
 
 ;; Agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-agenda-files my-org-path)
 (setq org-sort-agenda-notime-is-late nil) ; Items without time are put at the top of the day
+(add-hook 'calendar-mode-hook #'buffer-face-mode)
+(add-hook 'org-agenda-mode-hook #'buffer-face-mode)
 
 ;; avy
 (use-package avy
