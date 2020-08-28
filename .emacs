@@ -480,7 +480,8 @@
 ;; avy
 (use-package avy
   :init
-  (setq avy-keys '(?s ?d ?f ?g ?h ?j ?k ?l))
+  (setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (setq avy-style 'de-bruijn)
   (global-set-key (kbd "C-.") 'avy-goto-word-1)
   )
 
