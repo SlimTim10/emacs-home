@@ -563,6 +563,10 @@
 ;; 	 (add-to-list 'grep-find-ignored-files "GTAGS")
 ;; 	 (add-to-list 'grep-find-ignored-files "GRTAGS")))
 
+;; dumb-jump
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+(setq dumb-jump-force-searcher 'ag)
+
 (defun keyboard-quit-context+ ()
   "Quit current context.
 
