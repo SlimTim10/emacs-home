@@ -10,3 +10,5 @@
 (defun win-audio-headset ()
   (interactive)
   (shell-command "nircmd setdefaultsounddevice \"Headset Earphone\" 1"))
+
+(provide 'win-audio)
