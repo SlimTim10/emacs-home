@@ -281,6 +281,7 @@
 (require 'my-mail-to)
 (require 'calculate-money-earned)
 (require 'xah)
+(require 'win-audio)
 ;; (load "kaleidoscopeflux-blog-notify.el")
 ;; (require 'kaleidoscopeflux-blog-notify)
 ;; (load "headache-pressure-notify.el")
@@ -445,23 +446,23 @@
 (setq smtpmail-stream-type 'ssl)
 
 ;; Org mode
-(setq my-org-path '("~/Dropbox/org/"))
+(let ((default-directory "~/Dropbox/org"))
+  (setq org-directory default-directory)
+  (setq my-org-path '(default-directory))
+  (setq org-default-notes-file (expand-file-name "notes.org")))
 (setq org-log-done "time") ; Display timestamp for finished TODO items
 (setq org-src-fontify-natively t)
 (global-set-key (kbd "C-c l") 'org-store-link)
-(add-hook 'org-mode-hook
-		  '(lambda ()
-			 (local-set-key "\C-cc" 'org-capture)))
+(global-set-key (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
-      '(("j" "Journal Entry"
-         entry (file+datetree buffer-file-name)
-         "* %?\n  %<%t%l:%M %p>")))
-(setq org-todo-keywords
- '((sequence "TODO" "IN-PROGRESS" "DONE"))
- )
-(setq org-todo-keyword-faces
- '(("IN-PROGRESS" . "orange"))
- )
+	  '(("t" "Task" entry (id "MISC-TASKS-EVENTS")
+		 "* TODO %?\n")
+		("e" "Event" entry (id "MISC-TASKS-EVENTS")
+		 "* %? \n")
+		("n" "Note" entry (id "MISC-NOTES")
+		 "* %? \n %U")
+		("j" "Journal" entry (file+datetree buffer-file-name)
+		 "* %?\n  %<%t%l:%M %p>")))
 (setq
  org-file-apps
  '((auto-mode . emacs)
@@ -469,19 +470,33 @@
    ("\\.pdf\\'" . default)
    ("\\.mp4\\'" . default)
    ("\\.jpg\\'" . default)))
+(setq org-goto-interface 'outline-path-completion)
+(setq org-outline-path-complete-in-steps nil) ; work nicely with ivy
 
 ;; Agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-agenda-files my-org-path)
-(setq org-sort-agenda-notime-is-late nil) ; Items without time are put at the top of the day
+(setq org-sort-agenda-notime-is-late t) ; items without time are put at the bottom of the day
+(setq org-refile-targets
+	  (quote ((nil :maxlevel . 6)
+			  (org-agenda-files :maxlevel . 6))))
+;; breadcrumbs
+;; (setq org-agenda-prefix-format
+;; 	  '((agenda . " %i %-12:c%?-12t% s %b")
+;; 		(timeline . "  % s")
+;; 		(todo . " %i %-12:c")
+;; 		(tags . " %i %-12:c")
+;; 		(search . " %i %-12:c")))
+;; (setq org-agenda-breadcrumbs-separator "/")
 (add-hook 'calendar-mode-hook #'buffer-face-mode)
 (add-hook 'org-agenda-mode-hook #'buffer-face-mode)
 
 ;; avy
 (use-package avy
   :init
-  (setq avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  (setq avy-style 'de-bruijn)
+  (setq avy-keys '(?s ?d ?f ?g ?h ?j ?k ?l))
+  (setq avy-style 'at-full)
+  (add-to-list 'avy-orders-alist '(avy-goto-word-1 . avy-order-closest))
   (global-set-key (kbd "C-.") 'avy-goto-word-1)
   )
 
@@ -504,6 +519,7 @@
   :init
   (setq projectile-completion-system 'ivy)
   (setq projectile-switch-project-action 'projectile-dired)
+  (setq projectile-indexing-method 'alien)
   :config
   (projectile-global-mode)
   )
@@ -564,8 +580,11 @@
 ;; 	 (add-to-list 'grep-find-ignored-files "GRTAGS")))
 
 ;; dumb-jump
-(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-(setq dumb-jump-force-searcher 'ag)
+(use-package dumb-jump
+  :init
+  (setq dumb-jump-force-searcher 'ag)
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+  )
 
 (defun keyboard-quit-context+ ()
   "Quit current context.
