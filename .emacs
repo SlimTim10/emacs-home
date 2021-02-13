@@ -472,6 +472,7 @@
    ("\\.jpg\\'" . default)))
 (setq org-goto-interface 'outline-path-completion)
 (setq org-outline-path-complete-in-steps nil) ; work nicely with ivy
+(setq org-export-html-postamble nil)
 
 ;; Agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
