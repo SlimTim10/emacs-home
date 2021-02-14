@@ -477,7 +477,7 @@
 ;; Agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-agenda-files my-org-path)
-(setq org-sort-agenda-notime-is-late t) ; items without time are put at the bottom of the day
+(setq org-sort-agenda-notime-is-late nil) ; items without time are put at the top of the day
 (setq org-refile-targets
 	  (quote ((nil :maxlevel . 6)
 			  (org-agenda-files :maxlevel . 6))))
