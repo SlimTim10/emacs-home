@@ -32,7 +32,7 @@
                 (builtin      "#ffb86c")
                 (keyword      "#ff79c6")
                 (const        "#8be9fd")
-                (comment      "#6272a4")
+                (comment      "#919dc0")
                 (func         "#50fa7b")
                 (str          "#f1fa8c")
                 (type         "#bd93f9")
