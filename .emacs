@@ -437,7 +437,7 @@
 ;; Org mode
 (let ((default-directory "~/Dropbox/org"))
   (setq org-directory default-directory)
-  (setq my-org-path '(default-directory))
+  (setq my-org-path (list default-directory))
   (setq org-default-notes-file (expand-file-name "notes.org")))
 (setq org-log-done "time") ; Display timestamp for finished TODO items
 (setq org-src-fontify-natively t)
