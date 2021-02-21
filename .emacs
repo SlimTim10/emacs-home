@@ -340,18 +340,7 @@
 
 ;; Colour theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'solarized-dark t)
-(setq solarized-scale-org-headlines t)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-level-1 ((t (:inherit outline-1 :height 1.0))))
- '(org-level-2 ((t (:inherit outline-2 :height 1.0))))
- '(org-level-3 ((t (:inherit outline-3 :height 1.0))))
- '(org-level-4 ((t (:inherit outline-4 :height 1.0))))
- '(org-level-5 ((t (:inherit outline-5 :height 1.0)))))
+(load-theme 'dracula t)
 (set-cursor-color "#00e000") ; Grey cursor is hard to find sometimes
 
 ;; ;; helm
@@ -621,6 +610,18 @@ behavior added."
            (signal 'quit nil)))))
 
 (global-set-key [remap keyboard-quit] #'keyboard-quit-context+)
+
+(defun run-javascript-file ()
+  "Runs entire javascript file in eshell buffer (creates a new one if it does not exist)."
+  (interactive)
+  (let* ((file (buffer-file-name))
+		 (buf (get-buffer-create (concat "*eshell*" (expand-file-name default-directory)))))
+	(with-current-buffer buf
+	  (print buf)
+	  (eshell/clear)
+	  (eshell-return-to-prompt)
+	  (insert (concat "node " "\"" file "\""))
+	  (eshell-send-input))))
 
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
