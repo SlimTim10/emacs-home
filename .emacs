@@ -482,6 +482,7 @@
 (setq org-refile-targets
 	  (quote ((nil :maxlevel . 6)
 			  (org-agenda-files :maxlevel . 6))))
+(setq org-agenda-timegrid-use-ampm t)
 ;; breadcrumbs
 ;; (setq org-agenda-prefix-format
 ;; 	  '((agenda . " %i %-12:c%?-12t% s %b")
