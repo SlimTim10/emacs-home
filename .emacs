@@ -475,6 +475,7 @@
 (setq org-outline-path-complete-in-steps nil) ; work nicely with ivy
 (setq org-export-html-postamble nil)
 (setq org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
+(setq org-cycle-separator-lines 1)
 
 ;; Agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
