@@ -501,6 +501,7 @@
   :init
   (setq avy-keys '(?s ?d ?f ?g ?h ?j ?k ?l))
   (setq avy-style 'at-full)
+  :config
   (add-to-list 'avy-orders-alist '(avy-goto-word-1 . avy-order-closest))
   (global-set-key (kbd "C-.") 'avy-goto-word-1)
   )
