@@ -35,8 +35,6 @@
   (delete-dups load-path))
 (global-eldoc-mode -1)
 (global-auto-revert-mode 1) ; Good for git branch switching
-(winner-mode 1)
-(global-set-key (kbd "C-c C-/") 'winner-undo)
 (setq bookmark-save-flag 1)
 
 
@@ -129,6 +127,15 @@
 
 ;; eyebrowse
 ;; (eyebrowse-mode t)
+
+;; winner
+(use-package winner
+  :load-path "~/.emacs.d/lisp"
+  :config
+  (winner-mode 1)
+  (global-set-key (kbd "C-c C-/") 'winner-undo)
+  )
+
 
 ;; C programming
 (setq-default c-basic-offset 4
