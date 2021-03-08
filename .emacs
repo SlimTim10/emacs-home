@@ -484,6 +484,11 @@
 (setq org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
 (setq org-cycle-separator-lines 0)
 (setq org-catch-invisible-edits 'show-and-error)
+(custom-theme-set-faces
+   'user
+   '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+   '(org-table ((t (:inherit fixed-pitch))))
+   '(org-formula ((t (:inherit fixed-pitch)))))
 
 ;; Agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
