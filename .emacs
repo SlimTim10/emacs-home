@@ -354,7 +354,6 @@
 ;; Colour theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'dracula t)
-(set-cursor-color "#00e000") ; Grey cursor is hard to find sometimes
 
 ;; ;; helm
 ;; (require 'helm-config)
