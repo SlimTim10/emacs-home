@@ -63,6 +63,9 @@
 	   "")
 	  (t elem)))
   mode-line-modes))
+(defadvice vc-mode-line (after my-after-vc-mode-line () activate)
+  (when (stringp vc-mode)
+	(setq vc-mode (concat " |" vc-mode)))) ; pipe bracket for git info in mode line
 (setq-default
  mode-line-format
  '("%e"
@@ -74,7 +77,6 @@
    ;; mode-line-frame-identification
    mode-line-buffer-identification
    mode-line-position
-   " |"
    (vc-mode vc-mode)
    " | "
    mode-line-modes
