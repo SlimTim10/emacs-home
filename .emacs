@@ -50,7 +50,7 @@
 (set-face-attribute 'mode-line-inactive nil :height 80)
 (setq
  mode-line-position
- '(("-- %p")
+ '((" | %p")
    "  "
    (line-number-mode ("(%l" (column-number-mode ",%c)")))))
 ;; Remove minor modes
