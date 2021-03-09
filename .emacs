@@ -37,17 +37,20 @@
 (global-auto-revert-mode 1) ; Good for git branch switching
 (setq bookmark-save-flag 1)
 
-
-;; Mode line
+;; Title
 (setq display-time-format "%l:%M %p  %a, %b %e, %Y")
 (setq display-time-default-load-average nil)
 (display-time-mode 1)
+(setq frame-title-format
+	  '(multiple-frames "%b" ("" invocation-name "@" system-name " - " display-time-string)))
+
+;; Mode line
 (column-number-mode 1)
 (set-face-attribute 'mode-line nil :height 80)
 (set-face-attribute 'mode-line-inactive nil :height 80)
 (setq
  mode-line-position
- '(("%p")
+ '(("-- %p")
    "  "
    (line-number-mode ("(%l" (column-number-mode ",%c)")))))
 ;; Remove minor modes
@@ -71,10 +74,11 @@
    ;; mode-line-frame-identification
    mode-line-buffer-identification
    mode-line-position
+   " |"
    (vc-mode vc-mode)
-   "  "
+   " | "
    mode-line-modes
-   mode-line-misc-info
+   ;; mode-line-misc-info
    mode-line-end-spaces))
 
 ;; Windows only
