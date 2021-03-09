@@ -391,7 +391,7 @@
   )
 (use-package swiper
   :init
-  (global-set-key (kbd "C-s") 'swiper)
+  (global-set-key (kbd "C-s") 'swiper-isearch)
   )
 (use-package colir)
 (use-package smex)
