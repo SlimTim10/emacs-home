@@ -105,8 +105,8 @@
   (add-to-list 'default-frame-alist
 			   '(font . "Lucida Grande")))
 
-;; Handle wrapping in text mode
-(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+;; Handle word wrapping
+(global-visual-line-mode 1)
 
 ;; General programming
 (show-paren-mode 1)
