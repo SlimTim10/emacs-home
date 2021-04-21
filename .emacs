@@ -656,6 +656,11 @@ behavior added."
 	  (insert (concat "node " "\"" file "\""))
 	  (eshell-send-input))))
 
+;; Tramp on Windows
+;; plink.exe (from PuTTY) needs to be in PATH
+(when (eq window-system 'w32)
+  (setq tramp-default-method "plink"))
+
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
