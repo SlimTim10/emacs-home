@@ -11,4 +11,9 @@
   (interactive)
   (shell-command "nircmd setdefaultsounddevice \"Headset Earphone\" 1"))
 
+;; Use TV
+(defun win-audio-tv ()
+  (interactive)
+  (shell-command "nircmd setdefaultsounddevice \"4 - DELL U2913WM\" 1"))
+
 (provide 'win-audio)
