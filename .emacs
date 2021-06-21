@@ -335,38 +335,46 @@
 
 ;; Dired
 (require 'ls-lisp)
-(setq ls-lisp-use-insert-directory-program nil)
-(setq dired-listing-switches "-alhv")
-(setq ls-lisp-format-time-list  '("%Y-%m-%d %l:%M %p" "%Y-%m-%d %l:%M %p")
-      ls-lisp-use-localized-time-format t)
-(setq dired-dwim-target t) ; Try to guess a default target directory
-(setq dired-recursive-copies 'always) ; "always" means no asking
-(setq dired-recursive-deletes 'always) ; Delete recursively without asking
-(setq dired-isearch-filenames t) ; Limit search commands to file names
-(put 'dired-find-alternate-file 'disabled nil) ; Enable useful command
-; My keys
-(add-hook 'dired-mode-hook
-		  (lambda ()
-			(dired-hide-details-mode 1)
-			(local-set-key (kbd "C-c C-p") 'dired-prev-subdir)
-			(local-set-key (kbd "C-c C-n") 'dired-next-subdir)))
+(use-package dired
+  :bind
+  (:map
+   dired-mode-map
+   ("C-c C-p" . dired-prev-subdir)
+   ("C-c C-n" . dired-next-subdir)
+   ("k" . dired-kill-and-next-subdir) ; Opposite of "i"
+   ("RET" . my-dired-operate-on-file)
+   ("DEL" . dired-up-alternate-directory)
+   ("C-c RET" . dired-w32-open-file)
+   )
+  :config
+  (setq ls-lisp-use-insert-directory-program nil)
+  (setq dired-listing-switches "-alhv")
+  (setq ls-lisp-format-time-list  '("%Y-%m-%d %l:%M %p" "%Y-%m-%d %l:%M %p")
+		ls-lisp-use-localized-time-format t)
+  (setq dired-dwim-target t) ; Try to guess a default target directory
+  (setq dired-recursive-copies 'always) ; "always" means no asking
+  (setq dired-recursive-deletes 'always) ; Delete recursively without asking
+  (setq dired-isearch-filenames t) ; Limit search commands to file names
+  (dired-hide-details-mode 1)
+  (put 'dired-find-alternate-file 'disabled nil) ; Enable useful command
+  )
+
+(defun dired-kill-and-next-subdir ()
+  (interactive)
+  (let* ((subdir-name (dired-current-directory))
+         (parent-dir  (file-name-directory (directory-file-name subdir-name)))
+         (search-term (concat " " (file-name-nondirectory (directory-file-name subdir-name)))))
+    (dired-kill-subdir)
+    (dired-goto-subdir parent-dir)
+    (search-forward search-term)))
+
+(defun dired-up-alternate-directory ()
+  (interactive)
+  (find-alternate-file ".."))
 
 ;; Colour theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'dracula t)
-
-;; ;; helm
-;; (require 'helm-config)
-;; (helm-mode 1)
-;; (helm-autoresize-mode 1)
-;; (setq helm-buffer-max-length nil)
-;; (define-key global-map [remap find-file] 'helm-find-files)
-;; (define-key global-map [remap occur] 'helm-occur)
-;; (define-key global-map [remap list-buffers] 'helm-buffers-list)
-;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
-;; (global-set-key (kbd "M-x") 'helm-M-x)
-;; (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-;; (global-set-key (kbd "M-l") 'switch-to-buffer)
 
 ;; Ivy, Counsel, Swiper
 (use-package ivy

@@ -28,19 +28,12 @@
 	(if (or (string-match "text" file-type)
 			(string-match "empty" file-type)
 			(string-match "directory" file-type))
-		(dired-find-file)
+		(dired-find-alternate-file)
 	  (w32-shell-execute "open" file-name))))
 
 (defun dired-w32-open-file ()
   "Open a file in Windows with default program."
   (interactive)
   (w32-shell-execute "open" (dired-get-filename nil t)))
-
-(defun dired-mode-keys ()
-  "My keys for dired-mode."
-  (interactive)
-  (local-set-key (kbd "<return>") 'my-dired-operate-on-file)
-  (local-set-key (kbd "C-c RET") 'dired-w32-open-file)
-)
 
 (add-hook 'dired-mode-hook 'dired-mode-keys)
