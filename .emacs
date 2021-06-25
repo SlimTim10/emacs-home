@@ -41,8 +41,8 @@
 (setq display-time-format "%l:%M %p  %a, %b %e, %Y")
 (setq display-time-default-load-average nil)
 (display-time-mode 1)
-(setq frame-title-format
-	  '(multiple-frames "%b" ("" invocation-name "@" system-name " | " (:eval (persp-current-name)) " |" display-time-string)))
+;; (setq frame-title-format
+;; 	  '(multiple-frames "%b" ("" invocation-name "@" system-name " | " (:eval (persp-current-name)) " |" display-time-string)))
 
 ;; Mode line
 (column-number-mode 1)
@@ -61,7 +61,7 @@
 	(pcase elem
 	  (`(:propertize (,_ minor-mode-alist . ,_) . ,_)
 	   "")
-	  (t elem)))
+	  (_ elem)))
   mode-line-modes))
 (defadvice vc-mode-line (after my-after-vc-mode-line () activate)
   (when (stringp vc-mode)
@@ -336,6 +336,7 @@
 ;; Dired
 (require 'ls-lisp)
 (use-package dired
+  :hook ((dired-mode . dired-hide-details-mode))
   :bind
   (:map
    dired-mode-map
@@ -355,7 +356,6 @@
   (setq dired-recursive-copies 'always) ; "always" means no asking
   (setq dired-recursive-deletes 'always) ; Delete recursively without asking
   (setq dired-isearch-filenames t) ; Limit search commands to file names
-  (dired-hide-details-mode 1)
   (put 'dired-find-alternate-file 'disabled nil) ; Enable useful command
   )
 
@@ -384,7 +384,7 @@
   (setq ivy-count-format "(%d/%d) ")
   ;; ; Use flx for fuzzy matching
   ;; (setq ivy-re-builders-alist
-  ;; 	  '((t . ivy--regex-fuzzy))) ; Default matching where space is .*
+  ;; 	  '((_ . ivy--regex-fuzzy))) ; Default matching where space is .*
   (setq ivy-re-builders-alist
 		'((t . ivy--regex-plus))) ; No initial ^ character
   (setq ivy-initial-inputs-alist nil)
@@ -407,30 +407,33 @@
 
 ;; Perspective mode
 (use-package perspective
+  :hook
+  (
+   (persp-mode . persp-turn-off-modestring)
+   (auto-save-hook . persp-state-save)
+   )
   :bind
   ("C-c w ." . persp-switch)
   ("C-c w \"" . persp-kill)
   ("C-c w ," . persp-rename)
   ("M-l" . persp-ivy-switch-buffer)
   ("C-x b" . persp-ivy-switch-buffer)
+  ("C-x C-b" .
+   (lambda (arg)
+	 (interactive "P")
+	 (if (fboundp 'persp-bs-show)
+		 (persp-bs-show arg)
+	   (bs-show "all"))))
   :init
   (setq persp-state-default-file "~/.emacs.d/.emacs.perspective")
   :config
   (persp-mode)
-  (add-hook 'auto-save-hook #'persp-state-save)
-  (persp-turn-off-modestring)
-  (persp-state-load persp-state-default-file))
-(global-set-key
- (kbd "C-x C-b")
- (lambda (arg)
-   (interactive "P")
-   (if (fboundp 'persp-bs-show)
-	   (persp-bs-show arg)
-	 (bs-show "all"))))
-(setq display-buffer-alist
-      '((".*" (display-buffer-reuse-window display-buffer-same-window))))
-(setq display-buffer-reuse-frames t)         ; reuse windows in other frames
-(setq even-window-sizes nil)                 ; display-buffer: avoid resizing
+  (persp-state-load persp-state-default-file)
+  (setq display-buffer-alist
+		'((".*" (display-buffer-reuse-window display-buffer-same-window))))
+  (setq display-buffer-reuse-frames t)         ; reuse windows in other frames
+  (setq even-window-sizes nil)                 ; display-buffer: avoid resizing
+  )
 
 ;; magit
 (use-package magit

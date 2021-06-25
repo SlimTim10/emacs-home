@@ -35,5 +35,3 @@
   "Open a file in Windows with default program."
   (interactive)
   (w32-shell-execute "open" (dired-get-filename nil t)))
-
-(add-hook 'dired-mode-hook 'dired-mode-keys)
