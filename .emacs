@@ -42,7 +42,7 @@
 (setq display-time-default-load-average nil)
 (display-time-mode 1)
 (setq frame-title-format
-	  '(multiple-frames "%b" ("" invocation-name "@" system-name " | " (:eval (persp-current-name)) " |" display-time-string)))
+	  '(multiple-frames "%b" ("" invocation-name "@" system-name " |" display-time-string)))
 
 ;; Mode line
 (column-number-mode 1)
@@ -391,6 +391,8 @@
   (global-set-key (kbd "C-c C-j") 'ivy-immediate-done)
   :config
   (ivy-mode 1)
+  :bind
+  ("M-l" . switch-to-buffer)
   )
 (use-package counsel
   :init
@@ -406,34 +408,34 @@
 (use-package flx)
 
 ;; Perspective mode
-(use-package perspective
-  :hook
-  (
-   (persp-mode . persp-turn-off-modestring)
-   (auto-save-hook . persp-state-save)
-   )
-  :bind
-  ("C-c w ." . persp-switch)
-  ("C-c w \"" . persp-kill)
-  ("C-c w ," . persp-rename)
-  ("M-l" . persp-ivy-switch-buffer)
-  ("C-x b" . persp-ivy-switch-buffer)
-  ("C-x C-b" .
-   (lambda (arg)
-	 (interactive "P")
-	 (if (fboundp 'persp-bs-show)
-		 (persp-bs-show arg)
-	   (bs-show "all"))))
-  :init
-  (setq persp-state-default-file "~/.emacs.d/.emacs.perspective")
-  :config
-  (persp-mode)
-  (persp-state-load persp-state-default-file)
-  (setq display-buffer-alist
-		'((".*" (display-buffer-reuse-window display-buffer-same-window))))
-  (setq display-buffer-reuse-frames t)         ; reuse windows in other frames
-  (setq even-window-sizes nil)                 ; display-buffer: avoid resizing
-  )
+;; (use-package perspective
+;;   :hook
+;;   (
+;;    (persp-mode . persp-turn-off-modestring)
+;;    (auto-save-hook . persp-state-save)
+;;    )
+;;   :bind
+;;   ("C-c w ." . persp-switch)
+;;   ("C-c w \"" . persp-kill)
+;;   ("C-c w ," . persp-rename)
+;;   ("M-l" . persp-ivy-switch-buffer)
+;;   ("C-x b" . persp-ivy-switch-buffer)
+;;   ("C-x C-b" .
+;;    (lambda (arg)
+;; 	 (interactive "P")
+;; 	 (if (fboundp 'persp-bs-show)
+;; 		 (persp-bs-show arg)
+;; 	   (bs-show "all"))))
+;;   :init
+;;   (setq persp-state-default-file "~/.emacs.d/.emacs.perspective")
+;;   :config
+;;   (persp-mode)
+;;   (persp-state-load persp-state-default-file)
+;;   (setq display-buffer-alist
+;; 		'((".*" (display-buffer-reuse-window display-buffer-same-window))))
+;;   (setq display-buffer-reuse-frames t)         ; reuse windows in other frames
+;;   (setq even-window-sizes nil)                 ; display-buffer: avoid resizing
+;;   )
 
 ;; magit
 (use-package magit
