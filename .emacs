@@ -41,8 +41,8 @@
 (setq display-time-format "%l:%M %p  %a, %b %e, %Y")
 (setq display-time-default-load-average nil)
 (display-time-mode 1)
-;; (setq frame-title-format
-;; 	  '(multiple-frames "%b" ("" invocation-name "@" system-name " | " (:eval (persp-current-name)) " |" display-time-string)))
+(setq frame-title-format
+	  '(multiple-frames "%b" ("" invocation-name "@" system-name " | " (:eval (persp-current-name)) " |" display-time-string)))
 
 ;; Mode line
 (column-number-mode 1)
