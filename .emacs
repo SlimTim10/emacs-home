@@ -468,7 +468,7 @@
 (setq org-src-fontify-natively t)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
-(defun my-org-goto-bill ()
+(defun my-org-goto-bill () ; currently not working
   (goto-char
    (let ((value (org-icompleting-read "Bill category:" (mapcar #'list (org-property-values "Bill")))))
 	 (org-element-map (org-element-parse-buffer 'headline) 'headline
@@ -479,13 +479,13 @@
 	   nil t))))
 (setq org-capture-templates
 	  '(("t" "Task" entry (id "MISC-TASKS-EVENTS")
-		 "* TODO %?\n")
+		 "* TODO %?\n" :empty-lines 1)
 		("e" "Event" entry (id "MISC-TASKS-EVENTS")
-		 "* %?\n%^T")
+		 "* %?\n%^T\n" :empty-lines 1)
 		("n" "Note" entry (id "MISC-NOTES")
-		 "* %?\n %U")
+		 "* %?\n %U\n" :empty-lines 1)
 		("b" "Bill" entry (file+function org-default-notes-file my-org-goto-bill)
-		 "* Paid\n%?\n%u")
+		 "* Paid\n%?\n%u\n" :empty-lines 1)
 		("j" "Journal" entry (file+datetree buffer-file-name)
 		 "* %?\n  %<%t%l:%M %p>")))
 (setq
