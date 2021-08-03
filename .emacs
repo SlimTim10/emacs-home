@@ -247,6 +247,13 @@
   (setq emmet-move-cursor-between-quotes t)
   )
 
+;; CSS
+(use-package css-mode
+  :config
+  (setq css-indent-offset 2)
+  (setq indent-tabs-mode nil)
+  )
+
 ;; HTML mode
 (add-hook 'html-mode-hook
 		  (lambda ()
