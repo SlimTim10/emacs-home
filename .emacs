@@ -163,6 +163,7 @@
 			(subword-mode 1)
 			(local-unset-key (kbd "C-c C-f"))
 			(local-unset-key (kbd "C-c C-b"))
+			(local-set-key (kbd "<tab>") 'haskell-indentation-indent-rigidly)
 			(local-set-key (kbd "C-c C-f") 'forward-sexp)
 			(local-set-key (kbd "C-c C-b") 'backward-sexp)
 			(local-set-key (kbd "C-c C-.") 'haskell-mode-jump-to-def)))
