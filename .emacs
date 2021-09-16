@@ -472,6 +472,7 @@
   (setq org-default-notes-file (expand-file-name "notes.org")))
 (setq org-log-done "time") ; Display timestamp for finished TODO items
 (setq org-src-fontify-natively t)
+(setq org-adapt-indentation nil)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
 (defun my-org-goto-bill () ; currently not working
