@@ -161,6 +161,7 @@
   (add-hook 'haskell-mode-hook
 		  (lambda ()
 			(subword-mode 1)
+			(local-unset-key (kbd "M-.")) ; xref-find-definitions for dumb-jump
 			(local-unset-key (kbd "C-c C-f"))
 			(local-set-key (kbd "C-c C-f") 'forward-sexp)
 			(local-unset-key (kbd "C-c C-b"))
@@ -516,6 +517,12 @@
    '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
    '(org-table ((t (:inherit fixed-pitch))))
    '(org-formula ((t (:inherit fixed-pitch)))))
+(setq org-todo-keywords
+ '((sequence "TODO" "IN-PROGRESS" "|" "DONE"))
+ )
+(setq org-todo-keyword-faces
+ '(("IN-PROGRESS" . "magenta"))
+ )
 
 ;; Agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
