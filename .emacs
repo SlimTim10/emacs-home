@@ -513,6 +513,7 @@
 (setq org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
 (setq org-cycle-separator-lines 0)
 (setq org-catch-invisible-edits 'show-and-error)
+(setq org-log-into-drawer t)
 (custom-theme-set-faces
    'user
    '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
