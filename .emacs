@@ -1,17 +1,16 @@
 ;; Packages
 (require 'package)
-(add-to-list
- 'package-archives
- '("melpa" . "http://melpa.org/packages/") t)
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-  )
-(when (>= emacs-major-version 24)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-  )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-archives
+   '(("gnu" . "https://elpa.gnu.org/packages/")
+	 ("melpa" . "https://melpa.org/packages/")))
+ '(package-selected-packages
+   '(dumb-jump counsel-projectile avy magit flx smex colir counsel ivy nix-mode web-mode haskell-mode)))
 (package-initialize)
-;; (package-refresh-contents)
 
 ;; Startup
 (setq inhibit-startup-screen t)
@@ -36,6 +35,8 @@
 (global-eldoc-mode -1)
 (global-auto-revert-mode 1) ; Good for git branch switching
 (setq bookmark-save-flag 1)
+(setq tab-bar-mode t)
+(setq tab-bar-show t)
 
 ;; Title
 (setq display-time-format "%l:%M %p  %a, %b %e, %Y")
@@ -115,6 +116,8 @@
 (electric-pair-mode 1)
 
 (require 'use-package)
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
 
 ;; Desktop mode
 (use-package desktop
@@ -304,10 +307,6 @@
 (require 'calculate-money-earned)
 (require 'xah)
 (require 'win-audio)
-;; (load "kaleidoscopeflux-blog-notify.el")
-;; (require 'kaleidoscopeflux-blog-notify)
-;; (load "headache-pressure-notify.el")
-;; (require 'headache-pressure-notify)
 
 ;; Move forward in mark ring
 (defun unpop-to-mark-command ()
@@ -345,6 +344,7 @@
 ;; Dired
 (require 'ls-lisp)
 (use-package dired
+  :ensure nil
   :hook ((dired-mode . dired-hide-details-mode))
   :bind
   (:map
@@ -412,39 +412,11 @@
   :init
   (global-set-key (kbd "C-s") 'swiper-isearch)
   )
-(use-package colir)
+(use-package colir
+  :ensure nil
+  )
 (use-package smex)
 (use-package flx)
-
-;; Perspective mode
-;; (use-package perspective
-;;   :hook
-;;   (
-;;    (persp-mode . persp-turn-off-modestring)
-;;    (auto-save-hook . persp-state-save)
-;;    )
-;;   :bind
-;;   ("C-c w ." . persp-switch)
-;;   ("C-c w \"" . persp-kill)
-;;   ("C-c w ," . persp-rename)
-;;   ("M-l" . persp-ivy-switch-buffer)
-;;   ("C-x b" . persp-ivy-switch-buffer)
-;;   ("C-x C-b" .
-;;    (lambda (arg)
-;; 	 (interactive "P")
-;; 	 (if (fboundp 'persp-bs-show)
-;; 		 (persp-bs-show arg)
-;; 	   (bs-show "all"))))
-;;   :init
-;;   (setq persp-state-default-file "~/.emacs.d/.emacs.perspective")
-;;   :config
-;;   (persp-mode)
-;;   (persp-state-load persp-state-default-file)
-;;   (setq display-buffer-alist
-;; 		'((".*" (display-buffer-reuse-window display-buffer-same-window))))
-;;   (setq display-buffer-reuse-frames t)         ; reuse windows in other frames
-;;   (setq even-window-sizes nil)                 ; display-buffer: avoid resizing
-;;   )
 
 ;; magit
 (use-package magit
@@ -620,26 +592,15 @@
 		  (lambda ()
 			(define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
-;; gtags
-;; (require 'helm-gtags)
-;; (add-hook 'c-mode-hook 'helm-gtags-mode)
-;; (add-hook 'c++-mode-hook 'helm-gtags-mode)
-;; (eval-after-load "helm-gtags"
-;;   '(progn
-;; 	 (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
-;; 	 (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
-;; (eval-after-load "grep"
-;;   '(progn
-;; 	 (add-to-list 'grep-find-ignored-files "GPATH")
-;; 	 (add-to-list 'grep-find-ignored-files "GTAGS")
-;; 	 (add-to-list 'grep-find-ignored-files "GRTAGS")))
-
 ;; dumb-jump
 (use-package dumb-jump
   :init
   (setq dumb-jump-force-searcher 'ag)
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
   )
+
+;; nix
+(use-package nix-mode)
 
 (defun keyboard-quit-context+ ()
   "Quit current context.
@@ -699,3 +660,11 @@ behavior added."
 (global-set-key (kbd "C-<") 'pop-to-mark-command)
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
 (global-set-key (kbd "M-k") 'kill-this-buffer)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-formula ((t (:inherit fixed-pitch))))
+ '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
+ '(org-table ((t (:inherit fixed-pitch)))))
