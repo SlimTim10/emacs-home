@@ -319,7 +319,7 @@
         (setq mark-ring (nbutlast mark-ring))
         (goto-char (marker-position (car (last mark-ring))))))
 
-;; Easier window movement
+;; Easier window resizing
 (global-set-key (kbd "M-J") (lambda () (interactive) (enlarge-window 1)))
 (global-set-key (kbd "M-K") (lambda () (interactive) (enlarge-window -1)))
 (global-set-key (kbd "M-H") (lambda () (interactive) (enlarge-window -1 t)))
