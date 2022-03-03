@@ -351,6 +351,7 @@
 (add-hook 'dired-mode-hook 'my-buffer-face-mode-fixed)
 (add-hook 'calendar-mode-hook 'my-buffer-face-mode-fixed)
 (add-hook 'org-agenda-mode-hook 'my-buffer-face-mode-fixed)
+(add-hook 'magit-mode-hook 'my-buffer-face-mode-fixed)
 
 ;; Dired
 (require 'ls-lisp)
