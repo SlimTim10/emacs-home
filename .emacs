@@ -43,7 +43,7 @@
 (setq display-time-default-load-average nil)
 (display-time-mode 1)
 (setq frame-title-format
-	  '(multiple-frames "%b" ("" invocation-name "@" system-name " |" display-time-string)))
+	  '(multiple-frames "Emacs - %b" ("" invocation-name "@" system-name " |" display-time-string)))
 
 ;; Mode line
 (column-number-mode 1)
