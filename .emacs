@@ -7,9 +7,9 @@
  ;; If there is more than one, they won't work right.
  '(package-archives
    '(("gnu" . "https://elpa.gnu.org/packages/")
-	 ("melpa" . "https://melpa.org/packages/")))
+     ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(dumb-jump counsel-projectile avy magit flx smex colir counsel ivy nix-mode web-mode haskell-mode)))
+   '(elixir-mode typescript-mode markdown-mode ag yaml-mode use-package pdf-tools ledger-mode dumb-jump counsel-projectile avy magit flx smex colir counsel ivy nix-mode web-mode haskell-mode)))
 (package-initialize)
 
 ;; Startup
@@ -370,8 +370,6 @@
   :config
   (setq ls-lisp-use-insert-directory-program nil)
   (setq dired-listing-switches "-alhv")
-  (setq ls-lisp-format-time-list  '("%Y-%m-%d %l:%M %p" "%Y-%m-%d %l:%M %p")
-		ls-lisp-use-localized-time-format t)
   (setq dired-dwim-target t) ; Try to guess a default target directory
   (setq dired-recursive-copies 'always) ; "always" means no asking
   (setq dired-recursive-deletes 'always) ; Delete recursively without asking
@@ -694,6 +692,20 @@ behavior added."
 ;; plink.exe (from PuTTY) needs to be in PATH
 (when (eq window-system 'w32)
   (setq tramp-default-method "plink"))
+
+;; ledger
+(use-package ledger-mode
+  :init
+  (setq ledger-mode-should-check-version nil)
+  (setq ledger-binary-path (executable-find "hledger"))
+  (setq ledger-report-links-in-register nil)
+  (setq ledger-report-native-highlighting-arguments '("--color=always"))
+  (setq ledger-report-auto-width nil)
+  (setq ledger-copy-transaction-insert-blank-line-after t)
+  (setq tab-always-indent 'complete)
+  (setq completion-cycle-threshold t)
+  (setq ledger-complete-in-steps t)
+  )
 
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
