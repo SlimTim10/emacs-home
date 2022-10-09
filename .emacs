@@ -9,7 +9,7 @@
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(elixir-mode typescript-mode markdown-mode ag yaml-mode use-package pdf-tools ledger-mode dumb-jump counsel-projectile avy magit flx smex colir counsel ivy nix-mode web-mode haskell-mode)))
+   '(typescript-mode markdown-mode ag yaml-mode use-package pdf-tools ledger-mode dumb-jump counsel-projectile avy magit flx smex colir counsel ivy nix-mode web-mode haskell-mode)))
 (package-initialize)
 
 ;; Startup
