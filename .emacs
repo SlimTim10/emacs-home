@@ -707,6 +707,11 @@ behavior added."
   (setq ledger-complete-in-steps t)
   )
 
+;; agda
+(load-file
+ (let ((coding-system-for-read 'utf-8))
+   (shell-command-to-string "/home/tim/.cabal/bin/agda-mode locate")))
+
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
 (global-set-key (kbd "M-O") (lambda () (interactive) (other-window -1)))
