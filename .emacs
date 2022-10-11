@@ -512,7 +512,36 @@ Version 2019-11-04 2021-02-16"
 		("b" "Bill" entry (file+function org-default-notes-file my-org-goto-bill)
 		 "* Paid\n%?\n%u\n" :empty-lines 1)
 		("j" "Journal" entry (file+datetree buffer-file-name)
-		 "* %?\n  %<%t%l:%M %p>")))
+		 "* %?\n  %<%t%l:%M %p>")
+        ("s" "Session" entry (file buffer-file-name)
+         "
+* Session
+
+%^t
+
+** Plan
+
+- ?
+
+** Summary
+
+- ?
+
+** Goals
+
+- ?
+
+** My tasks
+
+- [ ] Send session recording
+  - ?
+- [ ] Payment ($?)
+  - [ ] Send invoice (#0000)
+  - [ ] Paid
+"
+         :jump-to-captured t
+         :empty-lines 1)
+        ))
 (setq
  org-file-apps
  '((auto-mode . emacs)
