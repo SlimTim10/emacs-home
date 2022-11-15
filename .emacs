@@ -491,6 +491,7 @@ Version 2019-11-04 2021-02-16"
 (setq org-src-fontify-natively t)
 (setq org-adapt-indentation nil)
 (setq org-src-preserve-indentation t)
+(setq org-id-link-to-org-use-id t) ; Use IDs for header links (create if not exist)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
 (defun my-org-goto-bill () ; currently not working
