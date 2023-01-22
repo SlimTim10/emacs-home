@@ -5,12 +5,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files
+   '("/home/tim/Dropbox/org/notes.org" "/home/tim/Dropbox/org/Getting Started with Orgzly.org" "/home/tim/Dropbox/org/Lambda_Calculus_Socratic.org" "/home/tim/Dropbox/org/The Lambda Calculus.org" "/home/tim/Dropbox/org/climbing log.org" "/home/tim/Dropbox/org/customer_discovery.org" "/home/tim/Dropbox/org/devOpen.org" "/home/tim/Dropbox/org/health log.org" "/home/tim/Dropbox/org/journal.org" "/home/tim/Dropbox/org/old_notes.org" "/home/tim/Dropbox/org/projects.org" "/home/tim/Dropbox/org/puzzleware.org" "/home/tim/Dropbox/org/recipes.org" "/home/tim/Dropbox/org/shopping.org" "/home/tim/Dropbox/org/tmp.org" "/home/tim/Dropbox/org/to-do.org"))
  '(org-id-link-to-org-use-id t)
  '(package-archives
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(typescript-mode markdown-mode ag yaml-mode use-package pdf-tools ledger-mode dumb-jump counsel-projectile avy magit flx smex colir counsel ivy nix-mode web-mode haskell-mode)))
+   '(tide typescript-mode markdown-mode ag yaml-mode use-package pdf-tools ledger-mode dumb-jump counsel-projectile avy magit flx smex colir counsel ivy nix-mode web-mode haskell-mode)))
 (package-initialize)
 
 ;; Startup
@@ -232,16 +234,14 @@
 (use-package web-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
   (defun my-web-mode-hook ()
 	"Settings for Web mode."
-	(setq indent-tabs-mode t)
-	(web-mode-use-tabs)
 	(setq tab-width 2)
 	(setq web-mode-markup-indent-offset 2)
 	(setq web-mode-css-indent-offset 2)
 	(setq web-mode-code-indent-offset 2)
 	(emmet-mode)
-	(buffer-face-mode 1))
   (add-hook 'web-mode-hook  'my-web-mode-hook)
   )
 
