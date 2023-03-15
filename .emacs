@@ -12,7 +12,8 @@
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(tide typescript-mode markdown-mode ag yaml-mode use-package pdf-tools ledger-mode dumb-jump counsel-projectile avy magit flx smex colir counsel ivy nix-mode web-mode haskell-mode)))
+   '(magit tide typescript-mode markdown-mode ag yaml-mode use-package pdf-tools ledger-mode dumb-jump counsel-projectile avy flx smex colir counsel ivy nix-mode web-mode haskell-mode))
+ '(typescript-indent-level 2))
 (package-initialize)
 
 ;; Startup
