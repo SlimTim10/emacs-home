@@ -5,6 +5,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(debug-on-error t)
+ '(electric-pair-mode t)
+ '(electric-quote-mode t)
+ '(image-dired-thumb-height 250)
+ '(image-dired-thumb-size 250)
+ '(image-dired-thumb-width 250)
+ '(indent-tabs-mode nil)
  '(org-agenda-files
    '("/home/tim/Dropbox/org/notes.org" "/home/tim/Dropbox/org/Getting Started with Orgzly.org" "/home/tim/Dropbox/org/Lambda_Calculus_Socratic.org" "/home/tim/Dropbox/org/The Lambda Calculus.org" "/home/tim/Dropbox/org/climbing log.org" "/home/tim/Dropbox/org/customer_discovery.org" "/home/tim/Dropbox/org/devOpen.org" "/home/tim/Dropbox/org/health log.org" "/home/tim/Dropbox/org/journal.org" "/home/tim/Dropbox/org/old_notes.org" "/home/tim/Dropbox/org/projects.org" "/home/tim/Dropbox/org/puzzleware.org" "/home/tim/Dropbox/org/recipes.org" "/home/tim/Dropbox/org/shopping.org" "/home/tim/Dropbox/org/tmp.org" "/home/tim/Dropbox/org/to-do.org"))
  '(org-id-link-to-org-use-id t)
@@ -12,7 +19,7 @@
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(magit tide typescript-mode markdown-mode ag yaml-mode use-package pdf-tools ledger-mode dumb-jump counsel-projectile avy flx smex colir counsel ivy nix-mode web-mode haskell-mode))
+   '(drag-stuff elm-mode yaml-mode web-mode use-package tide smex rust-mode ruby-end rjsx-mode php-mode pdf-tools nix-mode markdown-preview-mode magit ledger-mode hledger-mode haskell-mode gptel go-mode go flx emmet-mode elixir-mode dumb-jump csharp-mode counsel-projectile avy ag))
  '(typescript-indent-level 2))
 (package-initialize)
 
