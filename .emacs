@@ -12,8 +12,6 @@
  '(image-dired-thumb-size 250)
  '(image-dired-thumb-width 250)
  '(indent-tabs-mode nil)
- '(org-agenda-files
-   '("/home/tim/Dropbox/org/notes.org" "/home/tim/Dropbox/org/Getting Started with Orgzly.org" "/home/tim/Dropbox/org/Lambda_Calculus_Socratic.org" "/home/tim/Dropbox/org/The Lambda Calculus.org" "/home/tim/Dropbox/org/climbing log.org" "/home/tim/Dropbox/org/customer_discovery.org" "/home/tim/Dropbox/org/devOpen.org" "/home/tim/Dropbox/org/health log.org" "/home/tim/Dropbox/org/journal.org" "/home/tim/Dropbox/org/old_notes.org" "/home/tim/Dropbox/org/projects.org" "/home/tim/Dropbox/org/puzzleware.org" "/home/tim/Dropbox/org/recipes.org" "/home/tim/Dropbox/org/shopping.org" "/home/tim/Dropbox/org/tmp.org" "/home/tim/Dropbox/org/to-do.org"))
  '(org-id-link-to-org-use-id t)
  '(package-archives
    '(("gnu" . "https://elpa.gnu.org/packages/")
@@ -747,10 +745,8 @@ behavior added."
   )
 
 ;; agda
-(load-file
- (let ((coding-system-for-read 'utf-8))
-   (shell-command-to-string "~/.cabal/bin/agda-mode locate")))
-(setq exec-path (append exec-path '("~/.cabal/bin")))
+(load-file (let ((coding-system-for-read 'utf-8))
+                (shell-command-to-string "agda-mode locate")))
 
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
