@@ -7,7 +7,6 @@
  ;; If there is more than one, they won't work right.
  '(debug-on-error t)
  '(electric-pair-mode t)
- '(electric-quote-mode t)
  '(image-dired-thumb-height 250)
  '(image-dired-thumb-size 250)
  '(image-dired-thumb-width 250)
