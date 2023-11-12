@@ -43,10 +43,20 @@
   (normal-top-level-add-subdirs-to-load-path)
   (delete-dups load-path))
 (global-eldoc-mode -1)
-(global-auto-revert-mode 1) ; Good for git branch switching
 (setq bookmark-save-flag 1)
 (setq tab-bar-mode t)
 (setq tab-bar-show t)
+
+;; Auto revert files when they change
+(global-auto-revert-mode t)
+
+;; Also auto refresh dired, but be quiet about it
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
+
+;; Use the file system nofitications instead of polling
+(setq auto-revert-use-notify t)
+(setq auto-revert-avoid-polling t)
 
 ;; Title
 (setq display-time-format "%l:%M %p  %a, %b %e, %Y")
@@ -491,10 +501,10 @@ Version 2019-11-04 2021-02-16"
 (setq smtpmail-stream-type 'ssl)
 
 ;; Org mode
-(let ((default-directory "~/Dropbox/org"))
+(let ((default-directory "~/Sync"))
   (setq org-directory default-directory)
   (setq my-org-path (list default-directory))
-  (setq org-default-notes-file (expand-file-name "notes.org")))
+  (setq org-default-notes-file (expand-file-name "notes_sync.org")))
 (setq org-log-done "time") ; Display timestamp for finished TODO items
 (setq org-src-fontify-natively t)
 (setq org-adapt-indentation nil)
