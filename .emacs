@@ -577,6 +577,15 @@ Version 2019-11-04 2021-02-16"
  '(("DOING" . "magenta"))
  )
 
+;; Run this to archive all "DONE" tasks in a file
+(defun org-archive-done-tasks ()
+  (interactive)
+  (org-map-entries
+   (lambda ()
+     (org-archive-subtree)
+     (setq org-map-continue-from (org-element-property :begin (org-element-at-point))))
+   "/DONE" 'file))
+
 ;; Agenda
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-agenda-files my-org-path)
