@@ -512,15 +512,6 @@ Version 2019-11-04 2021-02-16"
 (setq org-id-link-to-org-use-id t) ; Use IDs for header links (create if not exist)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c c") 'org-capture)
-(defun my-org-goto-bill () ; currently not working
-  (goto-char
-   (let ((value (org-icompleting-read "Bill category:" (mapcar #'list (org-property-values "Bill")))))
-	 (org-element-map (org-element-parse-buffer 'headline) 'headline
-	   (lambda (hl)
-		 (and
-		  (string= (org-element-property :BILL hl) value)
-		  (org-element-property :contents-end hl)))
-	   nil t))))
 (setq org-capture-templates
 	  '(("t" "Task" entry (id "MISC-TASKS-EVENTS")
 		 "* TODO %?\n" :empty-lines 1)
@@ -528,8 +519,6 @@ Version 2019-11-04 2021-02-16"
 		 "* %?\n%^T\n" :empty-lines 1)
 		("n" "Note" entry (id "MISC-NOTES")
 		 "* %?\n %U\n" :empty-lines 1)
-		("b" "Bill" entry (file+function org-default-notes-file my-org-goto-bill)
-		 "* Paid\n%?\n%u\n" :empty-lines 1)
 		("j" "Journal" entry (file+datetree buffer-file-name)
 		 "* %?\n  %<%t%l:%M %p>")
         ("s" "Session" entry (file buffer-file-name)
@@ -582,10 +571,10 @@ Version 2019-11-04 2021-02-16"
    '(org-table ((t (:inherit fixed-pitch))))
    '(org-formula ((t (:inherit fixed-pitch)))))
 (setq org-todo-keywords
- '((sequence "TODO" "IN-PROGRESS" "|" "DONE"))
+ '((sequence "TODO" "DOING" "|" "DONE"))
  )
 (setq org-todo-keyword-faces
- '(("IN-PROGRESS" . "magenta"))
+ '(("DOING" . "magenta"))
  )
 
 ;; Agenda
