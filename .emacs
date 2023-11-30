@@ -771,4 +771,6 @@ behavior added."
  ;; If there is more than one, they won't work right.
  '(org-formula ((t (:inherit fixed-pitch))))
  '(org-indent ((t (:inherit (org-hide fixed-pitch)))))
- '(org-table ((t (:inherit fixed-pitch)))))
+ '(org-table ((t (:inherit fixed-pitch))))
+ '(mode-line ((t (:background "dim gray"))))
+ '(mode-line-inactive ((t (:background nil :foreground "gray")))))
