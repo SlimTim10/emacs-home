@@ -515,13 +515,11 @@ Version 2019-11-04 2021-02-16"
 (global-set-key (kbd "C-c c") 'org-capture)
 (setq org-capture-templates
 	  '(("t" "Task" entry (id "MISC-TASKS-EVENTS")
-		 "* TODO %?\n" :empty-lines 1)
+		 "* TODO %?\n" :jump-to-captured t :empty-lines 1)
 		("e" "Event" entry (id "MISC-TASKS-EVENTS")
-		 "* %?\n%^T\n" :empty-lines 1)
+		 "* %?\n%^T\n" :jump-to-captured t :empty-lines 1)
 		("n" "Note" entry (id "MISC-NOTES")
-		 "* %?\n %U\n" :empty-lines 1)
-		("j" "Journal" entry (file+datetree buffer-file-name)
-		 "* %?\n  %<%t%l:%M %p>")
+		 "* %?\n %U\n" :jump-to-captured t :empty-lines 1)
         ("s" "Session" entry (file buffer-file-name)
          "
 * Session
@@ -547,6 +545,18 @@ Version 2019-11-04 2021-02-16"
 - [ ] Payment ($?)
   - [ ] Send invoice (#0000)
   - [ ] Paid
+"
+         :jump-to-captured t
+         :empty-lines 1)
+        ("c" "New contact" entry (id "CONTACTS")
+         "
+* %?
+:PROPERTIES:
+:Address: ?
+:Phone: ?
+:Email: ?
+:LinkedIn: ?
+:END:
 "
          :jump-to-captured t
          :empty-lines 1)
