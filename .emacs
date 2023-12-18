@@ -17,7 +17,7 @@
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "https://melpa.org/packages/")))
  '(package-selected-packages
-   '(drag-stuff elm-mode yaml-mode web-mode use-package tide smex rust-mode ruby-end rjsx-mode php-mode pdf-tools nix-mode markdown-preview-mode magit ledger-mode hledger-mode haskell-mode gptel go-mode go flx emmet-mode elixir-mode dumb-jump csharp-mode counsel-projectile avy ag))
+   '(drag-stuff elm-mode yaml-mode web-mode use-package tide smex rust-mode ruby-end rjsx-mode php-mode pdf-tools nix-mode markdown-preview-mode magit hledger-mode haskell-mode gptel go-mode go flx emmet-mode elixir-mode dumb-jump csharp-mode counsel-projectile avy ag))
  '(typescript-indent-level 2))
 (package-initialize)
 
@@ -750,19 +750,51 @@ behavior added."
 (when (eq window-system 'w32)
   (setq tramp-default-method "plink"))
 
-;; ledger
-(use-package ledger-mode
+;; hledger
+(use-package hledger-mode
+  :mode ("\\.journal\\'")
+  :commands hledger-enable-reporting
+  :preface
+  (defun hledger/next-entry ()
+    "Move to next entry and pulse."
+    (interactive)
+    (hledger-next-or-new-entry)
+    (hledger-pulse-momentary-current-entry))
+
+  (defface hledger-warning-face
+    '((((background dark))
+       :background "Red" :foreground "White")
+      (((background light))
+       :background "Red" :foreground "White")
+      (t :inverse-video t))
+    "Face for warning"
+    :group 'hledger)
+
+  (defun hledger/prev-entry ()
+    "Move to previous entry and pulse."
+    (interactive)
+    (hledger-backward-entry)
+    (hledger-pulse-momentary-current-entry))
+
+  :bind (("C-c j" . hledger-run-command)
+         :map hledger-mode-map
+         ("C-c e" . hledger-jentry)
+         ("M-p" . hledger/prev-entry)
+         ("M-n" . hledger/next-entry)
+         ("C-c C-c" . hledger-toggle-star))
+  
   :init
-  (setq ledger-mode-should-check-version nil)
-  (setq ledger-binary-path (executable-find "hledger"))
-  (setq ledger-report-links-in-register nil)
-  (setq ledger-report-native-highlighting-arguments '("--color=always"))
-  (setq ledger-report-auto-width nil)
-  (setq ledger-copy-transaction-insert-blank-line-after t)
-  (setq tab-always-indent 'complete)
-  (setq completion-cycle-threshold t)
-  (setq ledger-complete-in-steps t)
-  )
+  (setq hledger-jfile
+        (expand-file-name "~/Dropbox/Accounting/current.journal"))
+  (setq hledger-currency-string "$")
+
+  :config
+  (add-hook 'hledger-mode-hook
+            (lambda ()
+              (make-local-variable 'company-backends)
+              (company-mode 1)
+			  (setq company-idle-delay 0)
+              (add-to-list 'company-backends 'hledger-company))))
 
 ;; agda
 (load-file (let ((coding-system-for-read 'utf-8))
@@ -774,7 +806,7 @@ behavior added."
 (global-set-key (kbd "M-/") 'hippie-expand)
 (global-set-key (kbd "C-<") 'pop-to-mark-command)
 (global-set-key (kbd "C->") 'unpop-to-mark-command)
-(global-set-key (kbd "M-k") 'kill-this-buffer)
+(global-set-key (kbd "M-k") 'kill-current-buffer)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
