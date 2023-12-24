@@ -793,12 +793,23 @@ behavior added."
             (lambda ()
               (make-local-variable 'company-backends)
               (company-mode 1)
-			  (setq company-idle-delay 0)
+    		  (setq company-idle-delay 0)
               (add-to-list 'company-backends 'hledger-company))))
 
 ;; agda
 (load-file (let ((coding-system-for-read 'utf-8))
                 (shell-command-to-string "agda-mode locate")))
+
+;; View PDFs
+(use-package pdf-tools
+  :ensure t
+  :pin manual ;; don't reinstall when package updates
+  :mode  ("\\.pdf\\'" . pdf-view-mode)
+  :config
+  (setq-default pdf-view-display-size 'fit-page)
+  (setq pdf-annot-activate-created-annotations t)
+  (pdf-tools-install :no-query)
+  (require 'pdf-occur))
 
 ;; My custom bindings
 (global-set-key (kbd "M-o") (lambda () (interactive) (other-window 1)))
