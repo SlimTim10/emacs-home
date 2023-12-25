@@ -502,10 +502,10 @@ Version 2019-11-04 2021-02-16"
 (setq smtpmail-stream-type 'ssl)
 
 ;; Org mode
-(let ((default-directory "~/Sync"))
+(let ((default-directory "~/Sync/Notes"))
   (setq org-directory default-directory)
   (setq my-org-path (list default-directory))
-  (setq org-default-notes-file (expand-file-name "notes_sync.org")))
+  (setq org-default-notes-file (expand-file-name "notes.org")))
 (setq org-log-done "time") ; Display timestamp for finished TODO items
 (setq org-src-fontify-natively t)
 (setq org-adapt-indentation nil)
@@ -785,7 +785,7 @@ behavior added."
   
   :init
   (setq hledger-jfile
-        (expand-file-name "~/Dropbox/Accounting/current.journal"))
+        (expand-file-name "~/Sync/Accounting/current.journal"))
   (setq hledger-currency-string "$")
 
   :config
